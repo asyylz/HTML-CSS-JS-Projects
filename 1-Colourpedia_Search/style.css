@@ -7,7 +7,7 @@
     --border-right-color-petals: #A60321;
     --border-right-color-yellow: #F2B705;
     --background-cotton: rgba(89, 50, 36, 0.4);
-    --background-petals: rgba(245, 175, 162, 0.8);
+    --background-petals: rgba(255, 138, 145, 0.8);
     --background-yellow: rgba(75, 78, 25, 0.6);
     --text-color-cotton: #593325;
     --text-color-petals: #A60321;
@@ -156,7 +156,7 @@ body.cotton-theme {
 }
 
 .cotton-theme span {
-    color: var(--hover-color-cotton);
+    color: var(--span-hover-text-cotton);
     background-color: var(--background-cotton);
 }
 
@@ -167,7 +167,7 @@ body.cotton-theme {
 }
 
 .cotton-theme #search-form span:hover {
-    background-color: var(--hover-color-cotton);
+    background-color: var(--span-hover-text-cotton);
 }
 
 .cotton-theme #search-input {
@@ -193,7 +193,7 @@ body.cotton-theme {
 }
 
 .cotton-theme button[type="submit"]:hover {
-    background-color: var(--hover-color-cotton);
+    background-color: var(--span-hover-text-cotton);
 }
 
 .cotton-theme .result-item a {
@@ -223,7 +223,7 @@ body.petals-theme {
 
 .petals-theme .header {
     background-color: var(--background-petals);
-    box-shadow: 0px 4px 10px 5px rgba(142, 36, 70, 0.7);
+    box-shadow: 0px 4px 10px 5px rgba(142, 36, 70, 0.5);
 }
 
 .petals-theme .titleHeading {
@@ -237,12 +237,12 @@ body.petals-theme {
 
 .petals-theme #search-form span {
     color: var(--text-color-petals);
-    background-color: var(--background-petals);
     box-shadow: 0px 4px 10px 5px rgba(142, 36, 70, 0.7);
 }
 
 .petals-theme #search-form span:hover {
-    background-color: var(--hover-color-petals);
+    background-color: var(--span-hooverbackground-petals);
+    color: var(--span-hover-color-petals);
 }
 
 .petals-theme #search-input {
@@ -269,7 +269,8 @@ body.petals-theme {
 }
 
 .petals-theme button[type="submit"]:hover {
-    background-color: var(--hover-color-petals);
+    background-color: var(--span-hooverbackground-petals);
+    color: var(--span-hover-color-petals);
 }
 
 .petals-theme .result-item a {
@@ -285,7 +286,7 @@ body.petals-theme {
 
 .petals-theme .result-snippet {
     background-color: var(--background-petals);
-    color: var(--hover-color-cotton);
+    color: var(--span-hover-text-cotton);
 }
 
 .petals-theme a.result-link:hover {
@@ -316,7 +317,8 @@ body.yellow-theme {
 }
 
 .yellow-theme #search-form span:hover {
-    background-color: var(--hover-color-yellow);
+    background-color: var(--span-hover-color-yellow);
+    color: var(--span-hooverbackground-yellow);
 }
 
 
@@ -343,7 +345,8 @@ body.yellow-theme {
 }
 
 .yellow-theme button[type="submit"]:hover {
-    background-color: var(--hover-color-yellow);
+    background-color: var(--span-hover-color-yellow);
+    color: var(--span-hooverbackground-yellow);
 }
 
 .yellow-theme .result-item a {
@@ -440,8 +443,9 @@ p span.searchmatch {
         left: 2.5rem;
         transform: translateX(-50%) translateY(-50%);
     }
-    div#search-results{
-        margin-top:4rem;
+
+    div#search-results {
+        margin-top: 4rem;
 
     }
 
