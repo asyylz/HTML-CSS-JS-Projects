@@ -15,7 +15,7 @@
     --search-span-color-cotton: #593325;
     --search-span-color-yellow: #3E4015;
     --search-span-color-petals: #A60321;
-    --search-span-background-yellow: rgba(245,180,16,0.6);
+    --search-span-background-yellow: rgba(245, 180, 16, 0.6);
     --span-hooverbackground-cotton: #73453F;
     --span-hooverbackground-petals: #A60321;
     --span-hooverbackground-yellow: #3E4015;
@@ -25,9 +25,6 @@
     --background-img-cotton: url('./assests/fluffy-cotton-bunch.jpg');
     --background-img-petals: url('./assests/petals.jpg');
     --background-img-yellow: url('./assests/yellow-flower.jpg');
-
-
-
 }
 
 body {
@@ -36,7 +33,7 @@ body {
     padding: 0;
     background-size: cover;
     height: 100vh;
-    background-size: cover;
+    width: 100%;
 }
 
 .container {
@@ -395,12 +392,57 @@ body.yellow-theme {
     font-size: 2rem;
     height: 10rem;
 }
+
 .result-snippet {
     border-radius: 1rem;
     padding: 0 5px;
- }
- p span.searchmatch {
-     line-height: 1rem;
-     border-radius: 1rem;
-     padding: 5px;
- }
+}
+
+p span.searchmatch {
+    line-height: 1rem;
+    border-radius: 1rem;
+    padding: 5px;
+}
+
+@media (max-width: 970px) {
+    form {
+        height: 130px;
+    }
+
+    form#search-form {
+        margin: auto;
+    }
+
+    .titleHeading {
+        margin-bottom: 10px;
+        margin-left: 6rem;
+    }
+
+    #search-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+    }
+
+    #search-form div {
+        margin-bottom: 40px;
+    }
+
+    .petals {
+        position: relative;
+    }
+
+    .petals::after {
+        content: 'Themes';
+        position: absolute;
+        bottom: 2rem;
+        left: 2.5rem;
+        transform: translateX(-50%) translateY(-50%);
+    }
+    div#search-results{
+        margin-top:4rem;
+
+    }
+
+}
