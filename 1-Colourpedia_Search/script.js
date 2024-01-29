@@ -18,6 +18,7 @@ async function searchWikipeida(query) {
   if (!reponse.ok) {
     throw new Error("Faild to fetch search results form wikipedia API.");
   }
+
   const json = await reponse.json();
   return json;
 }
@@ -29,17 +30,17 @@ function displayResults(results) {
   results.forEach((result) => {
     const url = `https://en.wikipedia.org/?curid=${results.pageid}`;
     const titleLink = `<a href="${url}" target="_blank" rel="noopener">${result.title} </a>`;
-    const urlLink = `<a href="${url} class="result-link" target="_blank" rel="noopener">${url}</a>`;
+    const urlLink = `<a href="${url}" class="result-link" target="_blank" rel="noopener">${url}</a>`;
 
-    const resultItem = document.createElement("div");
-    resultItem.className = "result-item";
-    resultItem.innerHTML = `
+    const resultItme = document.createElement("div");
+    resultItme.className = "result-item";
+    resultItme.innerHTML = `
         <h3 class="result-title">${titleLink}</h3>
         ${urlLink}
         <p class="result-snippet">${result.snippet}</p>
         `;
-    console.log(resultItem);
-    searchResults.appendChild(resultItem);
+
+    searchResults.appendChild(resultItme);
   });
 }
 
@@ -71,13 +72,14 @@ searchForm.addEventListener("submit", async (e) => {
 
 /* ----------------- lazy loading header ---------------- */
 function lazyLoadHeader() {
-  header.classList.add("hidden"); // Hide the header
+  //header.style.transition = "all 2s ease-in-out"; //this part added to css file
   setTimeout(() => {
-    header.classList.remove("hidden"); // Make header visible
-    setTimeout(() => {
-      header.classList.add("visible"); // Slide down the header
-    }, 500); // Delay to ensure smooth loading
-  }, 500); // Delay before revealing the header
+    header.style.opacity = 1;
+    //header.style.transform = "translateY(0)";
+  }, 50);
+  setTimeout(() => {
+    header.style.transition = "";
+  }, 2000);
 }
 document.addEventListener("DOMContentLoaded", lazyLoadHeader);
 
@@ -89,20 +91,20 @@ allSpansInHeader.forEach((span) => {
       body.classList.add("cotton-theme");
       body.classList.remove("petals-theme");
       body.classList.remove("yellow-theme");
-      body.style.backgroundImage = "url(/assests/fluffy-cotton-bunch.jpg)";
-      // lazyLoadHeader();
+      //body.style.backgroundImage = "url(./assests/fluffy-cotton-bunch.jpg)";
+      lazyLoadHeader();
     } else if (target.classList.contains("petals")) {
       body.classList.add("petals-theme");
       body.classList.remove("cotton-theme");
       body.classList.remove("yellow-theme");
-      body.style.backgroundImage = "url(/assests/petals.jpg)";
-      // lazyLoadHeader();
+      // body.style.backgroundImage = "url(./assests/petals.jpg)";
+      lazyLoadHeader();
     } else if (target.classList.contains("yellow")) {
       body.classList.add("yellow-theme");
       body.classList.remove("cotton-theme");
       body.classList.remove("petals-theme");
-      body.style.backgroundImage = "url(/assests/yellow-flower.jpg)";
-      // lazyLoadHeader();
+      //body.style.backgroundImage = "url(./assests/yellow-flower.jpg)";
+      lazyLoadHeader();
     }
   });
 });

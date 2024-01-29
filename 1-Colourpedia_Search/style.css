@@ -12,14 +12,22 @@
     --text-color-cotton: #593325;
     --text-color-petals: #A60321;
     --text-color-yellow: #F2A922;
+    --search-span-color-cotton: #593325;
     --search-span-color-yellow: #3E4015;
     --search-span-color-petals: #A60321;
-    --hover-color-cotton: #F2E5D5;
-    --hover-color-petals: #D95276;
-    --hover-color-yellow: #BDE038;
-    --background-img-cotton: url('/assests/fluffy-cotton-bunch.jpg');
-    --background-img-petals: url('/assests/petals.jpg');
-    --background-img-yellor: url('/assests/yellow-flower.jpg');
+    --search-span-background-yellow: rgba(245,180,16,0.6);
+    --span-hooverbackground-cotton: #73453F;
+    --span-hooverbackground-petals: #A60321;
+    --span-hooverbackground-yellow: #3E4015;
+    --span-hover-text-cotton: #F2E5D5;
+    --span-hover-color-petals: rgb(245, 175, 162);
+    --span-hover-color-yellow: #F2A922;
+    --background-img-cotton: url('./assests/fluffy-cotton-bunch.jpg');
+    --background-img-petals: url('./assests/petals.jpg');
+    --background-img-yellow: url('./assests/yellow-flower.jpg');
+
+
+
 }
 
 body {
@@ -28,7 +36,6 @@ body {
     padding: 0;
     background-size: cover;
     height: 100vh;
-    background-image: var(--background-img-cotton);
     background-size: cover;
 }
 
@@ -45,18 +52,11 @@ body {
     justify-content: space-between;
     align-items: center;
     position: fixed;
-    top: -100px;
+    top: 0;
     left: 0;
     width: 100%;
-    transition: top 1.5s ease;
-}
-
-.hidden {
-    visibility: hidden;
-}
-
-.header.visible {
-    top: 0;
+    opacity: 0;
+    transition: all 1.5s ease-in-out;
 }
 
 .titleHeading {
@@ -74,15 +74,8 @@ h1 {
 
 span {
     height: 1rem;
-    /* border-radius: 1rem; */
     width: 4rem;
 }
-
-/* span.searchmatch{
-    height: 1rem;
-    border-radius: 1rem;
-    width: 4rem;
-} */
 
 #search-form span {
     margin-left: 1rem;
@@ -147,18 +140,14 @@ button[type="submit"]::after {
     transform: translateY(-50%);
     right: -9px;
     top: 20px;
-
 }
 
 /* --------------------- cotton-theme -------------------- */
-.cotton-theme {
+body.cotton-theme {
+    background-image: var(--background-img-cotton);
     color: var(--text-color-cotton);
     background-color: var(--background-cotton);
 }
-
-/* .cotton-theme body {
-    background-image: var(--background-img-cotton);
-} */
 
 .cotton-theme .header {
     background-color: var(--background-cotton);
@@ -172,7 +161,6 @@ button[type="submit"]::after {
 .cotton-theme span {
     color: var(--hover-color-cotton);
     background-color: var(--background-cotton);
-
 }
 
 .cotton-theme #search-form span {
@@ -215,28 +203,26 @@ button[type="submit"]::after {
     color: var(--search-span-color-cotton);
 }
 
-/* .cotton-theme h3.result-title{
-    color: var(--search-span-color-cotton);
-} */
-/* .cotton-theme .result-item:first-child {
-    color: var(--text-color-cotton);
-} */
+.cotton-theme p span.searchmatch {
+    color: var(--span-hover-text-cotton);
+}
 
 .cotton-theme .result-snippet {
     color: var(--search-span-color-cotton);
     background-color: var(--background-cotton);
 }
 
-/* --------------------- petals-theme -------------------- */
-.petals-theme {
-    color: var(--text-color-petals);
-    /* background-color: var(--background-petals); */
+.cotton-theme a.result-link:hover {
+    color: var(--span-hover-text-cotton);
+    background-color: var(--span-hooverbackground-cotton);
 }
 
-/* .petals-theme body {
-    background-image: url(/assests/pink-liles.jpg);
-} */
-
+/* --------------------- petals-theme -------------------- */
+body.petals-theme {
+    color: var(--text-color-petals);
+    background-color: var(--background-petals);
+    background-image: var(--background-img-petals);
+}
 
 .petals-theme .header {
     background-color: var(--background-petals);
@@ -291,33 +277,31 @@ button[type="submit"]::after {
 
 .petals-theme .result-item a {
     color: var(--search-span-color-petals);
+
 }
 
-.petals-theme p {
-    color: var(--text-color-petals);
+.petals-theme p span.searchmatch {
+    color: var(--span-hover-text-cotton);
+    background: var(--border-right-color-petals);
+}
+
+
+.petals-theme .result-snippet {
     background-color: var(--background-petals);
-}
-
-.petals-theme .result-item span {
-    background-color: var(--border-right-color-petals);
     color: var(--hover-color-cotton);
 }
 
-/* .petals-theme h3.result-title{
-    color: var(--search-span-color-petals);
-} */
-/* .petals-theme .result-item:first-child {
-    color: var(--text-color-petals);
-} */
-
-/* -------------------- yellow theme -------------------- */
-.yellow-theme {
-    color: var(--text-color-yellow);
+.petals-theme a.result-link:hover {
+    color: var(--span-hover-color-petals);
+    background-color: var(--span-hooverbackground-petals);
 }
 
-/* .yellow-theme body {
+/* -------------------- yellow theme -------------------- */
+body.yellow-theme {
+    color: var(--text-color-yellow);
+    background-color: var(--background-petals);
     background-image: var(--background-img-yellow);
-} */
+}
 
 .yellow-theme .header {
     background-color: var(--background-yellow);
@@ -369,22 +353,20 @@ button[type="submit"]::after {
     color: var(--search-span-color-yellow);
 }
 
-.yellow-theme p {
+.yellow-theme p span.searchmatch {
     color: var(--text-color-yellow);
-    background-color: var(--background-yellow);
+    background: var(--background-yellow);
 }
 
-.yellow-theme .result-item span {
-    background-color: var(--border-right-color-yellow);
+.yellow-theme .result-snippet {
+    background-color: var(--search-span-background-yellow);
     color: var(--search-span-color-yellow);
 }
 
-/* .yellow-theme h3.result-title{
-    color: var(--search-span-color-yellow);
-} */
-/* .yellow-theme .result-item:first-child {
+.yellow-theme a.result-link:hover {
     color: var(--text-color-yellow);
-} */
+    background: var(--background-yellow);
+}
 
 /* ----------------------- results ---------------------- */
 #search-results {
@@ -392,8 +374,7 @@ button[type="submit"]::after {
 }
 
 .result-item {
-    margin-bottom: 1rem;
-
+    margin-bottom: 3rem;
 }
 
 .result-title {
@@ -403,19 +384,8 @@ button[type="submit"]::after {
 }
 
 .result-link {
-    display: block;
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
-    color: #0074d9;
-}
-
-.result-link:hover {
-    text-decoration: underline;
-}
-
-.result-snippet {
-    margin-top: 0;
-    line-height: 3rem;
 }
 
 .spinner {
@@ -425,3 +395,12 @@ button[type="submit"]::after {
     font-size: 2rem;
     height: 10rem;
 }
+.result-snippet {
+    border-radius: 1rem;
+    padding: 0 5px;
+ }
+ p span.searchmatch {
+     line-height: 1rem;
+     border-radius: 1rem;
+     padding: 5px;
+ }
