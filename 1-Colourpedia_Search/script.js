@@ -28,21 +28,25 @@ function displayResults(results) {
   searchResults.innerHTML = "";
 
   results.forEach((result) => {
-    const url = `https://en.wikipedia.org/?curid=${results.pageid}`;
-    const titleLink = `<a href="${url}" target="_blank" rel="noopener">${result.title} </a>`;
-    const urlLink = `<a href="${url}" class="result-link" target="_blank" rel="noopener">${url}</a>`;
+    // Ensure the result object has the expected properties
+    if (result && result.pageid) {
+      const url = `https://en.wikipedia.org/?curid=${result.pageid}`;
+      const titleLink = `<a href="${url}" target="_blank" rel="noopener">${result.title}</a>`;
+      const urlLink = `<a href="${url}" class="result-link" target="_blank" rel="noopener">${url}</a>`;
 
-    const resultItme = document.createElement("div");
-    resultItme.className = "result-item";
-    resultItme.innerHTML = `
+      const resultItem = document.createElement("div");
+      resultItem.className = "result-item";
+      resultItem.innerHTML = `
         <h3 class="result-title">${titleLink}</h3>
         ${urlLink}
         <p class="result-snippet">${result.snippet}</p>
-        `;
+      `;
 
-    searchResults.appendChild(resultItme);
+      searchResults.appendChild(resultItem);
+    }
   });
 }
+
 
 searchForm.addEventListener("submit", async (e) => {
   e.preventDefault();
