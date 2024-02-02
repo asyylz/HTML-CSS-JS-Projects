@@ -22,9 +22,9 @@
     --span-hover-text-cotton: #F2E5D5;
     --span-hover-color-petals: rgb(245, 175, 162);
     --span-hover-color-yellow: #F2A922;
-    --background-img-cotton: url('./assests/fluffy-cotton-bunch.jpg');
-    --background-img-petals: url('./assests/petals.jpg');
-    --background-img-yellow: url('./assests/yellow-flower.jpg');
+    --background-img-cotton: url('./assets/fluffy-cotton-bunch.jpg');
+    --background-img-petals: url('./assets/petals.jpg');
+    --background-img-yellow: url('./assets/yellow-flower.jpg');
 }
 
 body {
