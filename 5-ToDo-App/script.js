@@ -13,7 +13,7 @@ let unDone = 0;
 /* ------------------- imgLoadObserver ------------------ */
 const loadImg = function (entries, observer) {
   const [entry] = entries;
-  console.log(entries)
+  console.log(entries);
   if (!entry.isIntersecting) return;
   entry.target.src = entry.target.dataset.src;
   entry.target.addEventListener("load", function () {
