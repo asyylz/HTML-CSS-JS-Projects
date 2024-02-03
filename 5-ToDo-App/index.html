@@ -6,37 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODO</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
     <div class="image-container">
         <img class="lazy-img" src="./assets/pumpkin-lazy.jpg" data-src="./assets/pumpkin.jpeg" alt="pumpkin">
     </div>
-
-    <main>
+    <main class="main">
         <section class="section--1">
             <input type="text" id="inputText">
             <button class="add">Add</button>
         </section>
         <hr>
         <section class="section--2">
-            <ul id="todosList">
-                ToDos
+            <div class=" todos todos__pending">
+                Pending ToDos
                 <hr>
-            </ul>
-            <ul id="doneToDosList">Done ToDos
+                <ul id="pending"></ul>
+            </div>
+            <div class=" todos todos__completed">
+                Completed Todos
                 <hr>
-            </ul>
+                <ul id="completed">
+
+
+                </ul>
+            </div>
         </section>
         <hr>
-        <section class="message"> Status:
-        </section>
-      
-
-
-
+        <div class="footer">
+            <span class="pendingTasks"></span>
+        </div>
     </main>
-
     <script src="script.js"></script>
 </body>
 

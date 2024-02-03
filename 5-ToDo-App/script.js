@@ -1,14 +1,11 @@
 /* ---------------------- Variables --------------------- */
 const inputText = document.getElementById("inputText");
-const todosList = document.getElementById("todosList");
+const todosPending = document.getElementById("pending");
+const todosCompleted = document.getElementById("completed");
 const btnAdd = document.querySelector(".add");
-const mainToDoSection = document.querySelector(".section--2");
-const doneToDosList = document.getElementById("doneToDosList");
-const message = document.querySelector("section.message");
 const imgHeaderBackground = document.querySelector("img[data-src]");
-
-let done = 0;
-let unDone = 0;
+const main = document.querySelector(".main");
+let localStorageArray = [];
 
 /* ------------------- imgLoadObserver ------------------ */
 const loadImg = function (entries, observer) {
@@ -27,115 +24,142 @@ const imgObserver = new IntersectionObserver(loadImg, {
 });
 imgObserver.observe(imgHeaderBackground);
 
-/* ---------------------- Listeners --------------------- */
-btnAdd.addEventListener("click", handleAddButtonClick);
-inputText.addEventListener("keydown", handleInputTextKeydown);
-mainToDoSection.addEventListener("click", handleMainToDoSectionClick);
+/* ----------- localStorage ---------- */
 
-/* ---------------------- Functions --------------------- */
-function handleAddButtonClick() {
-  const todoText = inputText.value.trim();
-  if (todoText && checkToDoTextLength(todoText)) {
-    addToDo(todoText);
-    inputText.value = "";
+window.addEventListener("DOMContentLoaded", function () {
+  const storedTasks = localStorage.getItem("tasksInLocalStorage");
+  if (storedTasks) {
+    localStorageArray = JSON.parse(storedTasks);
   }
-}
-function handleInputTextKeydown(event) {
-  if (event.key === "Enter") {
-    handleAddButtonClick();
-  }
-}
+  retriveTodos();
+});
 
-function handleMainToDoSectionClick(event) {
-  const target = event.target;
-  if (target.classList.contains("checkboxes")) {
-    handleCheckboxChange(target);
-  } else if (target.classList.contains("delete-icon")) {
-    handleDeleteIconClick(target);
-  }
-}
-
-function addToDo(todoText) {
-  // const todoContainer = createTodoContainer();
-  const todoContainer = document.createElement("div");
-  todoContainer.className = "todo-container";
-  const newToDo = createNewTodoElement(todoText);
-  todoContainer.appendChild(newToDo);
-  todosList.appendChild(todoContainer);
-  updateDecorativeLineWidth(newToDo);
-  unDone++;
-  updateMessage();
-  return todoContainer;
-}
-
-function createNewTodoElement(todoText) {
-  const newToDo = document.createElement("li");
-  newToDo.className = "todo";
-  const checkbox = createCheckbox();
-  const textNode = document.createTextNode(todoText);
-  const imgDelete = createDeleteIcon();
-  newToDo.append(checkbox, textNode, imgDelete);
-  return newToDo;
-}
-
-function createCheckbox() {
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.className = "checkboxes";
-  return checkbox;
-}
-
-function createDeleteIcon() {
-  const imgDelete = document.createElement("img");
-  imgDelete.className = "delete-icon";
-  imgDelete.src = "./assets/delete.png";
-  return imgDelete;
-}
-
-function updateDecorativeLineWidth(newToDo) {
-  const decorativeLine = document.createElement("hr");
-  decorativeLine.style.width = setDecorativeLineWidth(newToDo) + "px";
-  const todoContainer = newToDo.parentNode;
-  todoContainer.appendChild(decorativeLine);
-}
-
-function setDecorativeLineWidth(element) {
-  return element.scrollWidth;
-}
-
-function checkToDoTextLength(todoText) {
-  return todoText.length > 0 && todoText.length <= 100;
-}
-
-function handleCheckboxChange(checkbox) {
-  const todoContainer = checkbox.closest(".todo-container");
-  //console.log(todoContainer)
-  if (checkbox.checked) {
-    doneToDosList.appendChild(todoContainer);
-    todoContainer.classList.add("doneStyle");
-    done++;
-    unDone--;
+/* ------------------------ evet.key= 'keyup' ----------------------- */
+inputText.addEventListener("keyup", function (event) {
+  handleKeyUp();
+});
+function handleKeyUp() {
+  const userEnteredValue = inputText.value.trim();
+  if (userEnteredValue.length !== 0) {
+    btnAdd.classList.add("active");
   } else {
-    todosList.appendChild(todoContainer);
-    todoContainer.classList.remove("doneStyle");
-    done--;
-    unDone++;
+    btnAdd.classList.remove("active");
   }
+}
+
+/* ---------------------- event.key='Enter' --------------------- */
+inputText.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") handlebtnAddOnClick();
+});
+
+/* -------------------- btnAdd click event-------------------- */
+btnAdd.addEventListener("click", function (e) {
+  handlebtnAddOnClick();
+});
+function handlebtnAddOnClick() {
+  const userEnteredValue = inputText.value.trim();
+  if (userEnteredValue.length !== 0) {
+    localStorageArray.push({
+      task: userEnteredValue,
+      isCheckboxChecked: false,
+    });
+    localStorage.setItem(
+      "tasksInLocalStorage",
+      JSON.stringify(localStorageArray)
+    );
+    retriveTodos();
+    inputText.value = "";
+    btnAdd.classList.remove("active");
+  }
+}
+
+function moveCompletedTasks(index) {
+  console.log(checkboxes);
+  localStorageArray.forEach((task, index) => {
+    if (task.isCheckboxChecked) {
+      localStorageCompleted.push(localStorageArray[index]);
+      localStorageArray.splice(index, 1);
+    }
+  });
+  localStorage.setItem(
+    "tasksInLocalStorage",
+    JSON.stringify(localStorageArray)
+  );
+  localStorage.setItem(
+    "tasksInLocalStorageCompleted",
+    JSON.stringify(localStorageCompleted)
+  );
+  retriveTodos();
+}
+/* --------------------- delete functionality -------------------- */
+function deleteTask(index) {
+  localStorageArray.splice(index, 1);
+  localStorage.setItem(
+    "tasksInLocalStorage",
+    JSON.stringify(localStorageArray)
+  );
+  retriveTodos();
+}
+/* -------------------- retrive todosPendin.innerHTML -------------------- */
+function retriveTodos() {
+  todosPending.innerHTML = ""; // Clear existing tasks
+  todosCompleted.innerHTML = ""; // Clear existing completed tasks
+
+  localStorageArray.forEach((task, index) => {
+    const checkbox = task.isCheckboxChecked ? "checked" : "";
+    const liStyle = task.isCheckboxChecked
+      ? "text-decoration: line-through;"
+      : "";
+
+    const newLiElement = `
+      <li class="" style="${liStyle}">
+        <input type="checkbox" class="checkbox" onchange="handleCheckboxChange(${index})" ${checkbox} />
+        <span id="span_${index}">${task.task}</span>
+        <span class="icon" onclick="deleteTask(${index})">
+          <i class="fas fa-trash"></i>
+        </span>
+      </li>
+    `;
+
+    if (task.isCheckboxChecked) {
+      todosCompleted.innerHTML += newLiElement;
+    } else {
+      todosPending.innerHTML += newLiElement;
+    }
+
+    const newHrElement = `<hr style="width:${
+      updateDecorativeLineWidth(index) + "px"
+    }">`;
+
+    if (task.isCheckboxChecked) {
+      todosCompleted.innerHTML += newHrElement;
+    } else {
+      todosPending.innerHTML += newHrElement;
+    }
+  });
   updateMessage();
 }
-function handleDeleteIconClick(deleteIcon) {
-  const todoContainer = deleteIcon.closest(".todo-container");
-  console.log(todoContainer);
-  const parentList = todoContainer.parentNode;
-  console.log(parentList);
-  parentList.removeChild(todoContainer);
-  if (parentList === todosList) {
-    unDone--;
-  } else if (parentList === doneToDosList) {
-    done--;
-  }
-  updateMessage();
+function updateDecorativeLineWidth(index) {
+  const span = document.getElementById("span_" + index);
+  return span.offsetWidth + 80;
 }
+
+function handleCheckboxChange(index) {
+  localStorageArray[index].isCheckboxChecked =
+    !localStorageArray[index].isCheckboxChecked;
+  localStorage.setItem(
+    "tasksInLocalStorage",
+    JSON.stringify(localStorageArray)
+  );
+  retriveTodos();
+}
+
 function updateMessage() {
-  message.textContent = `${done} out of ${unDone + done} tasks completed!`;
+  const message = document.querySelector(".pendingTasks");
+  const completedTasks = localStorageArray.filter(
+    (task) => task.isCheckboxChecked
+  );
+  const numCompleted = completedTasks.length;
+  const totalTasks = localStorageArray.length;
+  message.textContent = `${numCompleted} of ${totalTasks} tasks are completed.`;
 }

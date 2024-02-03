@@ -14,7 +14,7 @@ body {
 
 .image-container {
     width: 100%;
-    height: 30vh;
+    height: 20vh;
     overflow: hidden;
     box-shadow: 0px 4px 10px 10px rgba(127, 67, 67, 0.8);
 }
@@ -27,7 +27,7 @@ body {
 }
 
 .lazy-img {
-    filter: blur(10px);
+    filter: blur(20px);
 }
 
 .section--1 {
@@ -67,6 +67,9 @@ body {
     font-size: 1.5rem;
     border-radius: 0 6rem 6rem 0;
     margin-right: 2rem;
+    opacity: 0.6;
+    pointer-events: none;
+    transition: all 0.3s ease;
 }
 
 
@@ -79,7 +82,6 @@ hr {
     height: 3px;
     background-color: #925E53;
     margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
     box-shadow: 0px 6px 10px 5px rgba(127, 67, 67, 0.6);
 }
 
@@ -87,25 +89,23 @@ hr {
     display: flex;
     justify-content: space-evenly;
     font-size: 2rem;
-
 }
 
-.section--2 #todosList {
-    margin-left: 2rem;
-    width: 50%;
+div.todos {
+    flex: 1;
+    margin:1rem 2rem 1rem 2rem;
+}
+hr.line{
 
 }
+div.todos li .icon{
+  
+  }
 
-.section--2 #doneToDosList {
-    margin-left: 2rem;
-    margin-right: 2rem;
-    width: 50%;
-}
-
-section.message {
-    font-size: 2rem;
-    text-align: center;
-    margin-top: 2rem;
+i.fas.fa-trash{
+   margin-top: 10px;
+   color: #925E53;
+   margin-left: 1rem;
 }
 
 /* --------------------- JS Classes --------------------- */
@@ -113,33 +113,14 @@ ul {
     list-style-type: none;
 }
 
-div.todo-container {
-    margin-top: 1rem;
+/* --------------------- nepals code -------------------- */
+button.add.active {
+    opacity: 1;
+    pointer-events: auto;
 }
 
-li.todo {
-    display: inline-flex;
-    align-items: center;
-}
-
-img.delete-icon {
-    height: 2rem;
-    width: 2rem;
+.footer {
+    font-size: 2rem;
     margin-left: 2rem;
-
-}
-
-.doneStyle li.todo {
-    text-decoration: line-through;
-
-}
-
-input[type="checkbox"] {
-    margin-right: 0.5rem;
-    height: 1rem;
-    width: 1rem;
-}
-
-.lazy-img {
-    filter: blur(20px);
+    margin-top: 2rem;
 }
