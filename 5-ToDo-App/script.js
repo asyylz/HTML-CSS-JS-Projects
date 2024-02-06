@@ -5,19 +5,27 @@ const todosCompleted = document.getElementById("completed");
 const btnAdd = document.querySelector(".add");
 const imgHeaderBackground = document.querySelector("img[data-src]");
 const main = document.querySelector(".main");
+const btnPeachFuzz = document.querySelector("button.peachfuzz");
+const btnVintageTable = document.querySelector("button.vintagetable");
+const imageContainer = document.querySelector("div.image-container");
+const image = document.querySelector(".image-container img");
+const body = document.querySelector("body");
+const section2 = document.querySelector("section.section--2");
 let localStorageArray = [];
 
 /* ------------------- imgLoadObserver ------------------ */
-const loadImg = function (entries, observer) {
+function loadImg(entries, observer) {
   const [entry] = entries;
-  console.log(entries);
   if (!entry.isIntersecting) return;
+  console.log(entry)
   entry.target.src = entry.target.dataset.src;
   entry.target.addEventListener("load", function () {
     entry.target.classList.remove("lazy-img");
+    console.log(image);
   });
   observer.unobserve(entry.target);
-};
+}
+
 const imgObserver = new IntersectionObserver(loadImg, {
   root: null,
   threshold: 0,
@@ -162,4 +170,27 @@ function updateMessage() {
   const numCompleted = completedTasks.length;
   const totalTasks = localStorageArray.length;
   message.textContent = `${numCompleted} of ${totalTasks} tasks are completed.`;
+}
+
+/* -------------------- theme change ------------------- */
+btnPeachFuzz.addEventListener("click", changePeachfuzz);
+btnVintageTable.addEventListener("click", changeVintagetable);
+
+function changePeachfuzz() {
+  if (!body.classList.contains("peach-fuzz")) {
+    image.src = "";
+    image.dataset.src = "";
+    body.classList.add("peach-fuzz");
+    image.dataset.src = "./assets/peachfuzz.jpg";
+    image.src = "./assets/peachfuzz-lazy.jpg";
+  }
+
+}
+function changeVintagetable() {
+  if (body.classList.contains("peach-fuzz")) {
+    image.src = "";
+    image.dataset.src = "";
+    location.reload();
+    body.classList.remove("peach-fuzz");
+  }
 }
