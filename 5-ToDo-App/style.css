@@ -6,72 +6,50 @@
     margin: 0;
 }
 
+/* -------------------- color scheme -------------------- */
+:root {
+    --background-peachfuzz: #FED1B4;
+    --boxshadow-peachfuzz: 10px 10px 20px 20px rgba(177, 127, 104, 0.7);
+    --themebtn-background-peachfuzz: #D78E6D;
+    --input-focus-peachfuzz: #5F4139;
+    --input-textcolor-peachfuzz: #5F4139;
+    --trashbin-peachfuzz: #D78E6D;
+    --btnAdd-background-peachfuzz: #5F4139;
+    --btnAdd-textcolor-peachfuzz: #D78E6D;
+
+
+    --background-vintagetable: rgba(127, 67, 67, 0.4);
+    ;
+    --boxshadow-vintagetable: 0px 4px 10px 10px rgba(127, 67, 67, 0.8);
+    --input-focus-vintagetable: #925E53;
+    --input-textcolor-vintagetable: #925E53;
+    --trashbin-vintagetable: #925E53;
+    --btnAdd-textcolor-vintagetable: #3E0C17;
+    --btnAdd-background-vintagetable: #925E53;
+}
+
 body {
     height: 100vh;
-    background-color: rgba(127, 67, 67, 0.4);
-    font-family: Single Day;
-    min-width: 850px;
-}
-
-body.peach-fuzz {
-    background-color: #FED1B4;
-    display: flex;
-    min-width: 850px;
-}
-
-/* ----------------------- themes ----------------------- */
-.peach-fuzz .image-container {
-    width: 25%;
-    height: 100%;
-    overflow: hidden;
-    box-shadow: 10px 10px 20px 20px rgba(177, 127, 104, 0.7);
-    margin: 2rem;
-    padding: 1rem;
-} 
-.peach-fuzz .main {
-    width: 80%;
-    margin-right: 1rem;
-}
-peach-fuzz .image-container img.image {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: all 0.9s ease-in-out;
-    padding: 1.5rem;
+    background-color: var(--background-vintagetable);
+    font-family: Single Day;
+    color: #3E0C17;
 }
 
+/* ----------------------- vintagetable----------------------- */
 .image-container {
     width: 100%;
     height: 200px;
-    box-shadow: 0px 4px 10px 10px rgba(127, 67, 67, 0.8);
+    box-shadow: var(--boxshadow-vintagetable);
 }
+
 .image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: all 0.9s ease-in-out;
- 
 }
 
-
-
-body.peach-fuzz .section--2 {
-    width: 100%;
-}
-
-
-
-.peach-fuzz div.btnTheme {
-    background: #B17F68;
-}
-
-div.btnTheme button {
-    height: 2rem;
-    width: 7rem;
-    border-radius: 1rem;
-    border: none;
-    margin: 5px;
-}
 div.btnTheme {
     background: #3E0C17;
     height: 3rem;
@@ -81,12 +59,15 @@ div.btnTheme {
     align-items: center;
 }
 
-.lazy-img {
-    filter: blur(20px);
-}
-
-.hidden {
-    display: none;
+div.btnTheme button {
+    height: 2rem;
+    width: 7rem;
+    border-radius: 1rem;
+    border: none;
+    margin: 5px;
+    background-color: var(--btnAdd-background-vintagetable);
+    color: var(--btnAdd-textcolor-vintagetable);
+    font-size: 1rem;
 }
 
 .section--1 {
@@ -107,32 +88,13 @@ div.btnTheme {
     font-family: Single Day;
     font-weight: 300;
     font-size: 1.5rem;
-    color: #925E53;
+    color: var(--input-textcolor-vintagetable);
     margin-right: 2rem;
     margin-left: 2rem;
 }
 
-.section--1 button.add {
-    position: absolute;
-    right: 0;
-    height: 2.5rem;
-    width: 6rem;
-    border: none;
-    background-color: #925E53;
-    color: #3E0C17;
-    font-weight: bold;
-    font-family: Single Day;
-    font-size: 1.5rem;
-    border-radius: 0 6rem 6rem 0;
-    margin-right: 2rem;
-    opacity: 0.6;
-    pointer-events: none;
-    transition: all 0.3s ease;
-}
-
-
 .section--1 input:focus {
-    border: 3px solid rgba(62, 12, 23, 0.5);
+    border: 3px solid var(--input-focus-vintagetable);
 }
 
 hr {
@@ -143,37 +105,135 @@ hr {
     box-shadow: 0px 6px 10px 5px rgba(127, 67, 67, 0.6);
 }
 
-.section--2 {
-    display:flex;
-    justify-content: space-evenly;
-    font-size: 2rem;
-
+.section--1 button.add {
+    position: absolute;
+    right: 0;
+    height: 2.5rem;
+    width: 6rem;
+    border: none;
+    background-color: var(--btnAdd-background-vintagetable);
+    color: var(--btnAdd-textcolor-vintagetable);
+    font-weight: bold;
+    font-family: Single Day;
+    font-size: 1.5rem;
+    border-radius: 0 6rem 6rem 0;
+    margin-right: 2rem;
+    opacity: 0.8;
+    pointer-events: none;
+    transition: all 0.3s ease;
 }
 
-div.todos {
-    flex: 1;
-    margin: 1rem 2rem 1rem 2rem;
-    width: 100%;
-}
-
-
-i.fas.fa-trash {
-    margin-top: 10px;
-    color: #925E53;
-    margin-left: 1rem;
-}
-
-/* --------------------- JS Classes --------------------- */
-ul {
-    list-style-type: none;
-}
-
-/* --------------------- nepals code -------------------- */
 button.add.active {
     opacity: 1;
     pointer-events: auto;
 }
 
+.section--2 {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 2rem;
+    text-align: start;
+}
+
+.section--2 ul {
+    list-style-type: none;
+}
+
+div.todos {
+    margin: 1rem 2rem 1rem 2rem;
+    width: fit-content;
+    word-wrap: break-word;
+    flex: 1;
+}
+
+
+i.fas.fa-trash {
+    margin-top: 10px;
+    color: var(--trashbin-vintagetable);
+    margin-left: 1rem;
+}
+
+g {
+    filter: blur(20px);
+}
+
+.hidden {
+    display: none;
+}
+
+.lazy-img {
+    filter: blur(20px)
+}
+
+/* --------------------- peach-fuzz -------------------- */
+body.peach-fuzz {
+    display: flex;
+    background-color: var(--background-peachfuzz);
+    color: var(--input-textcolor-peachfuzz);
+}
+
+.peach-fuzz .image-container {
+    flex: 1;
+    width: 25%;
+    height: 100%;
+    overflow: hidden;
+    box-shadow: var(--boxshadow-peachfuzz);
+    margin: 2rem;
+    padding: 1rem;
+}
+
+.peach-fuzz .main{
+    margin-right: 1rem;
+    flex: 3;
+}
+
+peach-fuzz .image-container img.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.9s ease-in-out;
+    padding: 1.5rem;
+}
+
+.peach-fuzz div.btnTheme {
+    background: var(--themebtn-background-peachfuzz);
+}
+
+.peach-fuzz .btnTheme button {
+    border: none;
+    background-color: var(--btnAdd-background-peachfuzz);
+    color: var(--btnAdd-textcolor-peachfuzz);
+    font-size: 1rem;
+}
+
+.peach-fuzz .section--1 input {
+    color: var(--input-textcolor-peachfuzz);
+}
+
+.peach-fuzz .section--1 button.add {
+    background-color: var(--btnAdd-background-peachfuzz);
+    color: var(--btnAdd-textcolor-peachfuzz);
+}
+
+.peach-fuzz .section--1 input:focus {
+    border: 3px solid var(--input-focus-peachfuzz);
+}
+
+.peach-fuzz .section--2 {
+    color: var(--input-textcolor-peachfuzz);
+
+
+}
+
+.peach-fuzz div.todos {
+    text-wrap: wrap;
+}
+
+.peach-fuzz i.fas.fa-trash {
+    color: var(--trashbin-peachfuzz);
+}
+
+/* ----------------------- footer ----------------------- */
 .footer {
     font-size: 2rem;
     margin-left: 2rem;

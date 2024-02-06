@@ -17,7 +17,7 @@ let localStorageArray = [];
 function loadImg(entries, observer) {
   const [entry] = entries;
   if (!entry.isIntersecting) return;
-  console.log(entry)
+  console.log(entry);
   entry.target.src = entry.target.dataset.src;
   entry.target.addEventListener("load", function () {
     entry.target.classList.remove("lazy-img");
@@ -120,7 +120,7 @@ function retriveTodos() {
       : "";
 
     const newLiElement = `
-      <li class="" style="${liStyle}">
+    <li class="" style="${liStyle}">
         <input type="checkbox" class="checkbox" onchange="handleCheckboxChange(${index})" ${checkbox} />
         <span id="span_${index}">${task.task}</span>
         <span class="icon" onclick="deleteTask(${index})">
@@ -184,7 +184,6 @@ function changePeachfuzz() {
     image.dataset.src = "./assets/peachfuzz.jpg";
     image.src = "./assets/peachfuzz-lazy.jpg";
   }
-
 }
 function changeVintagetable() {
   if (body.classList.contains("peach-fuzz")) {
@@ -194,3 +193,4 @@ function changeVintagetable() {
     body.classList.remove("peach-fuzz");
   }
 }
+
