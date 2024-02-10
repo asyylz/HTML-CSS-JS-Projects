@@ -4,56 +4,56 @@
       "name": "Wedding Bouquet",
       "price": 40.00,
       "stockQuantity": 5,
-      "image": "laptop.jpg"
+      "image":"./assets/5-rosebouquet.avif"
     },
     {
       "id": 2,
       "name": "Pale Pink Ponies",
       "price": 18.00,
       "stockQuantity": 5,
-      "image": "smartphone.jpg"
+      "image":"./assets/3-pinkpenoies.avif"
     },
     {
       "id": 3,
       "name": "Ombre Tulips",
       "price": 25.00,
       "stockQuantity": 5,
-      "image": "headphones.jpg"
+      "image": "./assets/6-tulip.jpg"
     },
     {
       "id": 4,
       "name": "Wild Petite",
       "price": 40.00,
       "stockQuantity": 5,
-      "image": "tablet.jpg"
+      "image":"./assets/8-wildlife.avif"
     },
     {
       "id": 5,
       "name": "Everyday Bouquet",
       "price": 25.00,
       "stockQuantity": 5,
-      "image": "tablet.jpg"
+      "image":  "./assets/7-wedding.avif"
     },
     {
       "id": 6,
       "name": "Vivid Bouquet",
       "price": 50.00,
       "stockQuantity": 5,
-      "image": "tablet.jpg"
+      "image":"./assets/1-mixed.jpg"
     },
     {
       "id": 7,
       "name": "Pastel Pink Ponies",
       "price": 18.00,
       "stockQuantity": 5,
-      "image": "tablet.jpg"
+      "image":"./assets/4-pastelpinkpenoies.jpg"
     },
     {
       "id": 8,
       "name": "Spring Mixed",
       "price": 30.00,
       "stockQuantity": 5,
-      "image": "tablet.jpg"
+      "image":"./assets/2-peachpenoies.avif"
     }
   ]
   
