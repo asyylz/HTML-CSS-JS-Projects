@@ -47,10 +47,29 @@ btnsAddToCart.forEach((btn) => {
   });
 });
 
-/* ------------------- Top Cart Total ------------------- */
-let cartTotal = document.querySelector("span.badge");
-cartTotal.textContent = 0;
+/* -------------------- Updating cart ------------------- */
+let basketCount = document.querySelector("span.badge.basket");
+let basketTotal = document.querySelector("span.badge.basket-total");
+basketCount.textContent = 0;
+basketTotal.textContent = "£0.00";
 
+function updateCart() {
+  basketCount.textContent = cart.reduce((total, product) => {
+    return total + product.saleQuantity;
+  }, 0);
+  const totalPrice = (basketTotal.textContent = cart.reduce(
+    (total, product) => {
+      return total + product.saleQuantity * product.price;
+    },
+    0
+  ));
+
+  basketTotal.textContent = `£${totalPrice.toFixed(2)}`;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  updateCart();
+});
 /* ------------ Product to cart funtionality ----------- */
 function addProductToCart(productId) {
   const selectedProduct = products.find((product) => product.id === productId);
@@ -70,14 +89,10 @@ function addProductToCart(productId) {
     }
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    cartTotal.textContent = cart.reduce((total, product) => {
-      return total + product.saleQuantity;
-    }, 0);
+    updateCart();
   }
 }
-//addProductToCart(8);
-/* -------------------- Updating cart ------------------- */
-function updateCart() {}
+
 /* ----------------- Removing the product from the cart ---------------- */
 function removeProductFromCart(productId) {
   const selectedProduct = cart.find((product) => product.id === productId);
@@ -92,4 +107,3 @@ function removeProductFromCart(productId) {
   }
   localStorage.setItem("cart", JSON.stringify(cart));
 }
-//removeProductFromCart(3);
