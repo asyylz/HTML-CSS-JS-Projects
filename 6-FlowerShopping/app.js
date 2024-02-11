@@ -1,6 +1,5 @@
 "use strict";
 /* ------------------------ JSON ------------------------ */
-
 fetch("products.json") // returns a promise so we can use then()
   .then(function (response) {
     return response.json(); // parses JSON response into native JavaScript and also returns a promise so we can use then() again
@@ -25,6 +24,7 @@ const products = JSON.parse(localStorage.getItem("products")) || [];
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 /* ----------------- Adding product eventlistener option 1 ---------------- */
+//ASK
 // const sectionProducts = document.querySelector("section.py-2");
 // sectionProducts.addEventListener("click", function (e) {
 //   console.log(e.target)
@@ -65,12 +65,13 @@ function updateCart() {
   ));
   basketTotal.textContent = `£${totalPrice.toFixed(2)}`;
 
-  return basketCount.textContent, basketTotal.textContent;
+  //return basketCount.textContent, basketTotal.textContent; //ASK
 }
 
 document.addEventListener("DOMContentLoaded", function () {
   updateCart();
 });
+
 /* ------------ Product to cart funtionality ----------- */
 function addProductToCart(productId) {
   const selectedProduct = products.find((product) => product.id === productId);
@@ -88,9 +89,8 @@ function addProductToCart(productId) {
     } else {
       alert(`${existingProduct.name} no more available in stock`);
     }
-    localStorage.setItem("cart", JSON.stringify(cart));
-
     updateCart();
+    localStorage.setItem("cart", JSON.stringify(cart));
   }
 }
 
@@ -100,7 +100,7 @@ function decreaseAmountOfProductFromCart(productId) {
   console.log(selectedProduct);
   if (!selectedProduct) {
     console.error(`Product with ID ${productId} not found.`);
-    return; // Exit the function if the product is not found
+    return; // Exit
   } else if (selectedProduct.saleQuantity > 1) {
     selectedProduct.saleQuantity--;
   } else {
@@ -121,7 +121,10 @@ function removeProductFromCart(productId) {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-/* -------------- Retriving  data for carte ------------- */
+/* ------------------------------------------------------ */
+/*           RETRIEVING DATA FROM LOCAL STORAGE           */
+/* ----------------- FOR CART OFFCANVAS ----------------- */
+/* ------------------------------------------------------ */
 const offCanvasBody = document.querySelector(".offcanvas-body");
 const btnCanvas = document.querySelector("button[data-bs-toggle]");
 btnCanvas.addEventListener("click", retriveCartData());
@@ -129,7 +132,7 @@ btnCanvas.addEventListener("click", retriveCartData());
 function retriveCartData() {
   offCanvasBody.innerHTML = "";
   cart.forEach((product) => {
-/* ----------------- Cart HTML Template ----------------- */
+    /* ----------------- Cart HTML Template ----------------- */
     const item = `
 <div class="card rounded-3 mb-2">
 <p class="fs-5 mt-1 ms-3">${product.name}</p>
@@ -189,7 +192,7 @@ function retriveCartData() {
 
   /* ---------------- trash icons selected ---------------- */
   const btnsTrush = document.querySelectorAll("i.bi.bi-trash.h4");
-  console.log(btnsTrush)
+  console.log(btnsTrush);
   btnsTrush.forEach((btn) => {
     btn.addEventListener("click", function (e) {
       e.preventDefault();
@@ -201,14 +204,12 @@ function retriveCartData() {
       );
       const productId = productRemove.id;
       removeProductFromCart(productId);
-      retriveCartData()
-      //updateCart();
+      retriveCartData();
     });
   });
 
-  /* -------------------- -Minus icon select ------------------- */
+  /* ----------------Minus icon select and functionality--------------- */
   const btnsMinus = document.querySelectorAll("i.bi.bi-dash.h4");
-  console.log(btnsMinus);
   btnsMinus.forEach((btn) => {
     btn.addEventListener("click", function (e) {
       e.preventDefault();
@@ -221,10 +222,27 @@ function retriveCartData() {
       );
       const productId = productRemove.id;
       decreaseAmountOfProductFromCart(productId);
-      retriveCartData()
- 
+      retriveCartData();
     });
   });
+
+  /* --------------Plus icon select and functionality--------------- */
+  const btnsPlus = document.querySelectorAll("i.bi.bi-plus.h4");
+  btnsPlus.forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+    e.preventDefault();
+    const parent = e.target.closest(".card-body");
+    const img = parent.querySelector("img");
+
+    cart.find((product) => img.src.includes(product.image));
+    const productAdded = cart.find((product) =>
+      img.src.includes(product.image.slice(1))
+    );
+    const productId = productAdded.id;
+    addProductToCart(productId);
+    retriveCartData();
+  });
+})
 }
 
 function formatNumberValues(number) {
