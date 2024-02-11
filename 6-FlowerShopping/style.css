@@ -13,3 +13,6 @@ nav.nabar{
 .card.rounded-3.mb-2{
     background-color: #EBE9F0;
 }
+input#form1{
+    width:50px !important;
+}
