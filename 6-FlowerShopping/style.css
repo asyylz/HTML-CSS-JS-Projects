@@ -6,3 +6,10 @@ nav.nabar{
     position: fixed;
     top: 0;
 }
+/* .navbar-brand{
+    font-size: 20px;
+    justify-content: space-between;
+} */
+.card.rounded-3.mb-2{
+    background-color: #EBE9F0;
+}
