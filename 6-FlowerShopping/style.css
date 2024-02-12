@@ -43,7 +43,7 @@ div#offcanvasRight {
     color: var(--text-color);
 }
 
-div.card {
+div.card.rounded-3.mb-2 {
     color: var(--text-color);
 }
 

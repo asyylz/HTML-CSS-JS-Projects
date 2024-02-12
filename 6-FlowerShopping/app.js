@@ -191,9 +191,14 @@ function retriveCartData() {
   </div>`;
   offCanvasBody.innerHTML += totalDiv;
 
-  /* ---------------- trash icons selected ---------------- */
+  //Calling icon functions
+  trashIconHandler()
+  plusIconHandler();
+  minusIconHandler();
+}
+/* ---------------- Trash icons select adn functionality ---------------- */
+  function trashIconHandler() {
   const btnsTrush = document.querySelectorAll("i.bi.bi-trash.h4");
-  console.log(btnsTrush);
   btnsTrush.forEach((btn) => {
     btn.addEventListener("click", function (e) {
       e.preventDefault();
@@ -208,8 +213,9 @@ function retriveCartData() {
       retriveCartData();
     });
   });
-
-  /* ----------------Minus icon select and functionality--------------- */
+}
+/* ----------------Minus icon select and functionality--------------- */
+function minusIconHandler() {
   const btnsMinus = document.querySelectorAll("i.bi.bi-dash.h4");
   btnsMinus.forEach((btn) => {
     btn.addEventListener("click", function (e) {
@@ -226,24 +232,25 @@ function retriveCartData() {
       retriveCartData();
     });
   });
-
-  /* --------------Plus icon select and functionality--------------- */
+}
+/* --------------Plus icon select and functionality--------------- */
+function plusIconHandler() {
   const btnsPlus = document.querySelectorAll("i.bi.bi-plus.h4");
   btnsPlus.forEach((btn) => {
     btn.addEventListener("click", function (e) {
-    e.preventDefault();
-    const parent = e.target.closest(".card-body");
-    const img = parent.querySelector("img");
+      e.preventDefault();
+      const parent = e.target.closest(".card-body");
+      const img = parent.querySelector("img");
 
-    cart.find((product) => img.src.includes(product.image));
-    const productAdded = cart.find((product) =>
-      img.src.includes(product.image.slice(1))
-    );
-    const productId = productAdded.id;
-    addProductToCart(productId);
-    retriveCartData();
+      cart.find((product) => img.src.includes(product.image));
+      const productAdded = cart.find((product) =>
+        img.src.includes(product.image.slice(1))
+      );
+      const productId = productAdded.id;
+      addProductToCart(productId);
+      retriveCartData();
+    });
   });
-})
 }
 
 function formatNumberValues(number) {
