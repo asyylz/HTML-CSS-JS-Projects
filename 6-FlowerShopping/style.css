@@ -16,7 +16,7 @@ body {
 }
 
 nav.navbar {
-    background-color: black !important;
+    background-color: #191924 !important;
     color: var(--text-color);
 }
 
@@ -28,10 +28,12 @@ li.nav-item,
 
 button.btn-outline-dark {
     color: var(--text-color);
+    font-size: 1.1rem !important;
 }
 
 .card.rounded-3.mb-2 {
     background-color: var(--background-color);
+    border: 0.1px solid var(--text-color);
 }
 
 input#form1 {
@@ -49,12 +51,14 @@ div.card.rounded-3.mb-2 {
 
 .offcanvas-header {
     background-color: var(--background-color);
+    border: 0.1px solid var(--text-color);
 }
 
 .totalDiv-style {
     background-color: var(--background-color);
     border-radius: 10px;
     padding: 1rem;
+    border: 0.1px solid var(--text-color);
 }
 
 .icon-style {
