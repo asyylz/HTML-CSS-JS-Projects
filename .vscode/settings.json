@@ -1,3 +1,185 @@
 {
-  "liveServer.settings.port": 5503
+  "liveServer.settings.port": 5503,
+  "textmarker.savedHighlights": [
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "  <div class=\"col mb-5\">",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkgoldenrod"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* ----------------------- + icon ----------------------- */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkmagenta"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": " /* ------------------- increment input ------------------ */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkolivegreen"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* ----------------------- - icon ----------------------- */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkslateblue"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* ------------------------- img ------------------------ */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkslategray"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* --------------- remove item trush icon --------------- */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkviolet"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* -------------- Retriving  data for carte ------------- */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkblue"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* ----------------- Removing the product from the cart ---------------- */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkturquoise"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* ------------ Product to cart funtionality ----------- */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkgray"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* -------------------- Updating cart ------------------- */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkkhaki"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* ---------------- trash icons selected ---------------- */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkorange"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* ----------------- Cart HTML Template ----------------- */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkseagreen"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* ------------------------------------------------------ */\n/*           RETRIEVING DATA FROM LOCAL STORAGE           */\n /* ----------------- FOR CART OFFCANVAS ----------------- */\n /* ------------------------------------------------------ */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkviolet"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* ----------------- Removing/Decreasing the product from the cart ---------------- */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkviolet"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* ----------------- Adding product eventlistener option 2 ---------------- */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkviolet"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* ------------------------ JSON ------------------------ */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkviolet"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* -------------- Setting Global Variables -------------- */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkviolet"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* ----------------Minus icon select and functionality--------------- */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darksalmon"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* --------------Plus icon select and functionality--------------- */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkviolet"
+    },
+    {
+      "pattern": {
+        "type": "string",
+        "expression": "/* ------------------------------------------------------ */\n/*           RETRIEVING DATA FROM LOCAL STORAGE           */\n/* ----------------- FOR CART OFFCANVAS ----------------- */\n/* ------------------------------------------------------ */",
+        "ignoreCase": false,
+        "wholeMatch": false
+      },
+      "color": "darkviolet"
+    }
+  ]
 }

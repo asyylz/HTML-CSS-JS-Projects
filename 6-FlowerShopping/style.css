@@ -1,18 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+
+:root {
+    --background-color: #76806A;
+    --text-color: #D8D8D8;
+
+}
+
+body {
+    font-family: Oswald, Monaco;
+}
+
 .card-img-top {
     height: 15rem;
     object-fit: cover;
 }
-nav.nabar{
-    position: fixed;
-    top: 0;
+
+nav.navbar {
+    background-color: black !important;
+    color: var(--text-color);
 }
-/* .navbar-brand{
-    font-size: 20px;
-    justify-content: space-between;
-} */
-.card.rounded-3.mb-2{
-    background-color: #EBE9F0;
+
+.navbar-brand,
+li.nav-item,
+.nav-link {
+    color: var(--text-color) !important;
 }
-input#form1{
-    width:50px !important;
+
+button.btn-outline-dark {
+    color: var(--text-color);
+}
+
+.card.rounded-3.mb-2 {
+    background-color: var(--background-color);
+}
+
+input#form1 {
+    width: 50px !important;
+}
+
+div#offcanvasRight {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: var(--text-color);
+}
+
+div.card {
+    color: var(--text-color);
+}
+
+.offcanvas-header {
+    background-color: var(--background-color);
+}
+
+.totalDiv-style {
+    background-color: var(--background-color);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.icon-style {
+    color: var(--text-color);
+}
+
+header.py-5.my-5 {
+    background-color: var(--background-color) !important;
+}
+
+.display-4.fw-bolder {
+    color: var(--text-color) !important;
 }

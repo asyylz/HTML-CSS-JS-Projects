@@ -147,7 +147,7 @@ function retriveCartData() {
       <div class="d-flex m-3">
         <button class="btn btn-link px-2 text-center fw-bold"
           onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-          <i class="bi bi-dash h4"></i>
+          <i class="bi bi-dash h4 icon-style"></i>
         </button>
         <input id="form1" min="0" name="quantity" value="${
           product.saleQuantity
@@ -155,15 +155,15 @@ function retriveCartData() {
                     class="form-control form-control-sm" />
           <button class="btn btn-link"
           onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-          <i class="bi bi-plus h4"></i>
+          <i class="bi bi-plus h4 icon-style"></i>
           </button>
 
           </div>
         <div class="d-flex  justify-content-center align-items-center">
-        <h5 class="m-1">Product Total ${formatNumberValues(
+        <h5 class="m-1">Product Total: ${formatNumberValues(
           product.price * product.saleQuantity
         )}</h5>
-        <a href="#!" class="text-danger"><i class="bi bi-trash h4"></i></a>
+        <a href="#!" class="text-danger"><i class="bi bi-trash h4 icon-style"></i></a>
       </div>
       </div>
     </div>
@@ -174,7 +174,7 @@ function retriveCartData() {
   updateCart();
   const total = parseFloat(basketTotal.textContent.replace("£", ""));
   const vatAmount = total * 0.2; //VAT 20%
-  const totalDiv = `<div class="m-4">
+  const totalDiv = `<div class="m-4 totalDiv-style">
   <h5 class="m-3 d-flex justify-content-between"><span class="me-5">Total item:</span>${
     basketCount.textContent
   }</h5>
@@ -184,6 +184,7 @@ function retriveCartData() {
   <h5 class="m-3 d-flex justify-content-between"><span class="me-5">VAT (20%)</span>${formatNumberValues(
     vatAmount
   )}</h5>
+  <hr>
   <h5 class="m-3 d-flex justify-content-between"><span class="me-5">Total:</span>${formatNumberValues(
     total
   )}</h5>
