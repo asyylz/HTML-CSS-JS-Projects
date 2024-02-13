@@ -13,6 +13,19 @@ fetch("products.json")
 const products = JSON.parse(localStorage.getItem("products")) || [];
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+/* ---------------------- Preloader --------------------- */
+const loader = document.getElementById("preloader");
+const body = document.querySelector("body.loading");
+window.addEventListener("load", function () {
+  setTimeout(function () {
+    loader.style.opacity = "0";
+    setTimeout(function () {
+      loader.style.display = "none";
+      body.style.overflow = "auto";
+    }, 1000);
+  }, 1500);
+});
+
 /* --------------- Event Listeners and Handlers --------------- */
 document.addEventListener("DOMContentLoaded", function () {
   updateCart();
@@ -208,7 +221,7 @@ function createCartItemHTML({ id, name, price, image, saleQuantity }) {
     </div>
   </div>`;
 }
-function createMainPageItemHTML({ id, name, price, image}) {
+function createMainPageItemHTML({ id, name, price, image }) {
   return `
   <div class="col mb-5" id="${id}">
   <div class="card h-100">
@@ -225,9 +238,7 @@ function createMainPageItemHTML({ id, name, price, image}) {
     </div>
     <!-- Product actions-->
     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-      <div class="text-center"><a id="${
-        id
-      }" class="btn btn-outline-dark mt-auto btnAdd" href="#">Add to cart</a>
+      <div class="text-center"><a id="${id}" class="btn btn-outline-dark mt-auto btnAdd" href="#">Add to cart</a>
       </div>
     </div>
   </div>
