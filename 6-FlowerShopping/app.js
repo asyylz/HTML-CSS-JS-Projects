@@ -19,12 +19,12 @@ document.addEventListener("DOMContentLoaded", function () {
   retriveData();
   document.addEventListener("click", function (e) {
     // Check if the clicked element is a button
-    if (e.target && e.target.classList.contains("btnAdd"))  {
+    if (e.target && e.target.classList.contains("btnAdd")) {
       e.preventDefault();
       const productId = e.target.closest(".col.mb-5").getAttribute("id");
       addProductToCart(productId);
       retriveData();
-      console.log("addButton clicked!");
+      //console.log("addButton clicked!");
     }
   });
 });
@@ -48,14 +48,15 @@ document
 
 /* ---------------------- Handlers ---------------------- */
 function handleTrashIconClick(e) {
-  const parent = e.target.closest(".card-body");
-  const img = parent.querySelector("img");
-  const productRemove = cart.find((product) =>
-    img.src.includes(product.image.slice(1))
+  const productId = e.target.closest(".card").getAttribute("id");
+  const productRemove = cart.find(
+    (product) => parseInt(productId) === product.id
   );
-  if (productRemove) {
+  if (productRemove.id) {
     removeProductFromCart(productRemove.id);
     retriveData();
+  } else {
+    console.log(`Product with ID ${productRemove.id} not found.`);
   }
 }
 
@@ -171,15 +172,15 @@ function formatNumberValues(number) {
 
 /* ---------------- Creating DOM Element ---------------- */
 
-function createCartItemHTML(product) {
+function createCartItemHTML({ id, name, price, image, saleQuantity }) {
   return `
-  <div class="card rounded-3 mb-2">
-  <p class="fs-5 mt-1 ms-3">${product.name}</p>
+  <div class="card rounded-3 mb-2" id="${id}">
+  <p class="fs-5 mt-1 ms-3">${name}</p>
     <div class="card-body">
       <div class="d-flex flex-row justify-content-around align-items-center">
         <div class="col-1 flex-fill text-align-center ">
           <img
-            src="${product.image}"
+            src="${image}"
             class="w-50 img-fluid rounded-3 alt="">
         </div>
         <div class="col-3 flex-fill">
@@ -188,9 +189,7 @@ function createCartItemHTML(product) {
             onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
             <i class="bi bi-dash h4 icon-style"></i>
           </button>
-          <input id="form1" min="0" name="quantity" value="${
-            product.saleQuantity
-          }" type="number"
+          <input id="form1" min="0" name="quantity" value="${saleQuantity}" type="number"
                       class="form-control form-control-sm" />
             <button class="btn btn-link"
             onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
@@ -200,7 +199,7 @@ function createCartItemHTML(product) {
             </div>
           <div class="d-flex  justify-content-center align-items-center">
           <h5 class="m-1">Product Total: ${formatNumberValues(
-            product.price * product.saleQuantity
+            price * saleQuantity
           )}</h5>
           <a href="#!" class="text-danger"><i class="bi bi-trash h4 icon-style"></i></a>
         </div>
@@ -209,25 +208,25 @@ function createCartItemHTML(product) {
     </div>
   </div>`;
 }
-function createMainPageItemHTML(product) {
+function createMainPageItemHTML({ id, name, price, image}) {
   return `
-  <div class="col mb-5" id="${product.id}">
+  <div class="col mb-5" id="${id}">
   <div class="card h-100">
     <!-- Product image-->
-    <img class="card-img-top" src="${product.image}" id="1" alt="..." />
+    <img class="card-img-top" src="${image}" id="1" alt="..." />
     <!-- Product details-->
     <div class="card-body p-4">
       <div class="text-center">
         <!-- Product name-->
-        <h5 class="fw-bolder">${product.name}</h5>
+        <h5 class="fw-bolder">${name}</h5>
         <!-- Product price-->
-        ${formatNumberValues(product.price)}
+        ${formatNumberValues(price)}
       </div>
     </div>
     <!-- Product actions-->
     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
       <div class="text-center"><a id="${
-        product.id
+        id
       }" class="btn btn-outline-dark mt-auto btnAdd" href="#">Add to cart</a>
       </div>
     </div>
