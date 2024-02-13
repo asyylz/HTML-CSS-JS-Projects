@@ -121,10 +121,10 @@ function retriveData() {
     offCanvasBody.insertAdjacentHTML("beforeend", item);
   });
 
-  //offCanvasBody.insertAdjacentHTML("afterend", createCartTotalHTML());
-  offCanvasBody.innerHTML += createCartTotalHTML(); //
+ offCanvasBody.insertAdjacentHTML("beforeend", createCartTotalHTML());
 
   const container = document.querySelector("div.container .row");
+  container.innerHTML = "";
   products.forEach((product) => {
     const displayProduct = createMainPageItemHTML(product);
     container.insertAdjacentHTML("beforeend", displayProduct);
