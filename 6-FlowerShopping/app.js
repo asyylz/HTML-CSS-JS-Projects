@@ -17,12 +17,13 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 /* --------------- Event Listeners and Handlers --------------- */
 document.addEventListener("DOMContentLoaded", function () {
   updateCart();
-  retriveCartData();
+  retriveData();
+  btnsAddSelect();
 });
 
 document
   .querySelector("button[data-bs-toggle]")
-  .addEventListener("click", retriveCartData);
+  .addEventListener("click", retriveData);
 
 document
   .querySelector(".offcanvas-body")
@@ -37,112 +38,7 @@ document
     }
   });
 
-document.querySelectorAll(".btnAdd").forEach((btn) => {
-  btn.addEventListener("click", function (e) {
-    e.preventDefault();
-    const productId = parseInt(this.getAttribute("id"));
-    addProductToCart(productId);
-    retriveCartData();
-  });
-});
-
-/* -------------------- Functions ------------------- */
-function populateProductImages(data) {
-  for (let i = 0; i < data.length; i++) {
-    const imgURL = data[i].image;
-    const imgElement = document.getElementById(`${i + 1}`);
-    if (imgElement) {
-      imgElement.src = imgURL;
-    }
-  }
-}
-
-let basketCount = document.querySelector("span.badge.basket");
-let basketTotal = document.querySelector("span.badge.basket-total");
-basketCount.textContent = 0;
-basketTotal.textContent = "£0.00";
-function updateCart() {
-  basketCount.textContent = cart.reduce(
-    (total, product) => total + product.saleQuantity,
-    0
-  );
-
-  const totalPrice = cart.reduce(
-    (total, product) => total + product.saleQuantity * product.price,
-    0
-  );
-  basketTotal.textContent = `£${totalPrice.toFixed(2)}`;
-
-  //return basketCount.textContent, basketTotal.textContent; //ASK
-}
-
-function retriveCartData() {
-  const offCanvasBody = document.querySelector(".offcanvas-body");
-  offCanvasBody.innerHTML = "";
-  cart.forEach((product) => {
-    const item = createCartItemHTML(product);
-    offCanvasBody.insertAdjacentHTML("afterbegin", item);
-  });
-  updateCart();
-  const total = parseFloat(basketTotal.textContent.replace("£", ""));
-  const vatAmount = total * 0.2; //VAT 20%
-  const totalDiv = `<div class="m-4 totalDiv-style">
-  <h5 class="m-3 d-flex justify-content-between"><span class="me-5">Total item:</span>${
-    basketCount.textContent
-  }</h5>
-  <h5 class="m-3 d-flex justify-content-between"><span class="me-5">Subtotal:</span>${formatNumberValues(
-    total - vatAmount
-  )}</h5>
-  <h5 class="m-3 d-flex justify-content-between"><span class="me-5">VAT (20%)</span>${formatNumberValues(
-    vatAmount
-  )}</h5>
-  <hr>
-  <h5 class="m-3 d-flex justify-content-between"><span class="me-5">Total:</span>${formatNumberValues(
-    total
-  )}</h5>
-  </div>`;
-  offCanvasBody.innerHTML += totalDiv;
-}
-
-function createCartItemHTML(product) {
-  return `
-  <div class="card rounded-3 mb-2">
-  <p class="fs-5 mt-1 ms-3">${product.name}</p>
-    <div class="card-body">
-      <div class="d-flex flex-row justify-content-around align-items-center">
-        <div class="col-1 flex-fill text-align-center ">
-          <img
-            src="${product.image}"
-            class="w-50 img-fluid rounded-3 alt="">
-        </div>
-        <div class="col-3 flex-fill">
-        <div class="d-flex m-3">
-          <button class="btn btn-link px-2 text-center fw-bold"
-            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-            <i class="bi bi-dash h4 icon-style"></i>
-          </button>
-          <input id="form1" min="0" name="quantity" value="${
-            product.saleQuantity
-          }" type="number"
-                      class="form-control form-control-sm" />
-            <button class="btn btn-link"
-            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-            <i class="bi bi-plus h4 icon-style"></i>
-            </button>
-  
-            </div>
-          <div class="d-flex  justify-content-center align-items-center">
-          <h5 class="m-1">Product Total: ${formatNumberValues(
-            product.price * product.saleQuantity
-          )}</h5>
-          <a href="#!" class="text-danger"><i class="bi bi-trash h4 icon-style"></i></a>
-        </div>
-        </div>
-      </div>
-    </div>
-  </div>`;
-}
-
+/* ---------------------- Handlers ---------------------- */
 function handleTrashIconClick(e) {
   const parent = e.target.closest(".card-body");
   const img = parent.querySelector("img");
@@ -151,7 +47,7 @@ function handleTrashIconClick(e) {
   );
   if (productRemove) {
     removeProductFromCart(productRemove.id);
-    retriveCartData();
+    retriveData();
   }
 }
 
@@ -163,7 +59,7 @@ function handleMinusIconClick(e) {
   );
   if (productRemove) {
     decreaseAmountOfProductFromCart(productRemove.id);
-    retriveCartData();
+    retriveData();
   }
 }
 
@@ -175,10 +71,66 @@ function handlePlusIconClick(e) {
   );
   if (productAdd) {
     addProductToCart(productAdd.id);
-    retriveCartData();
+    retriveData();
   }
 }
+/* -------------------- Functions ------------------- */
+function btnsAddSelect() {
+  const btnsAdd = document.querySelectorAll(".btnAdd");
+  console.log(btnsAdd);
+  btnsAdd.forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      const productId = parseInt(this.getAttribute("id"));
+      addProductToCart(productId);
+      retriveData();
+    });
+  });
+}
+function populateProductImages(data) {
+  for (let i = 0; i < data.length; i++) {
+    const imgURL = data[i].image;
+    const imgElement = document.getElementById(`${i + 1}`);
+    if (imgElement) {
+      imgElement.src = imgURL;
+    }
+  }
+}
+function updateCart() {
+  const basketCount = document.querySelector("span.badge.basket");
+  const basketTotal = document.querySelector("span.badge.basket-total");
+  basketCount.textContent = totalItems();
+  basketTotal.textContent = totalAmount();
+}
+function totalItems() {
+  return cart.reduce((total, product) => total + product.saleQuantity, 0);
+}
 
+function totalAmount() {
+  return cart.reduce(
+    (total, product) => total + product.saleQuantity * product.price,
+    0
+  );
+}
+
+function retriveData() {
+  const offCanvasBody = document.querySelector(".offcanvas-body");
+  offCanvasBody.innerHTML = "";
+  cart.forEach((product) => {
+    const item = createCartItemHTML(product);
+    offCanvasBody.insertAdjacentHTML("beforeend", item);
+  });
+
+  //offCanvasBody.insertAdjacentHTML("afterend", createCartTotalHTML());
+  offCanvasBody.innerHTML += createCartTotalHTML(); //
+
+  const container = document.querySelector("div.container .row");
+  products.forEach((product) => {
+    const displayProduct = createMainPageItemHTML(product);
+    container.insertAdjacentHTML("beforeend", displayProduct);
+  });
+  updateCart();
+}
 function addProductToCart(productId) {
   const selectedProduct = products.find((product) => product.id === productId);
   if (!selectedProduct) {
@@ -226,4 +178,87 @@ function formatNumberValues(number) {
     style: "currency",
     currency: "GBP",
   });
+}
+
+/* ---------------- Creating DOM Element ---------------- */
+
+function createCartItemHTML(product) {
+  return `
+  <div class="card rounded-3 mb-2">
+  <p class="fs-5 mt-1 ms-3">${product.name}</p>
+    <div class="card-body">
+      <div class="d-flex flex-row justify-content-around align-items-center">
+        <div class="col-1 flex-fill text-align-center ">
+          <img
+            src="${product.image}"
+            class="w-50 img-fluid rounded-3 alt="">
+        </div>
+        <div class="col-3 flex-fill">
+        <div class="d-flex m-3">
+          <button class="btn btn-link px-2 text-center fw-bold"
+            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+            <i class="bi bi-dash h4 icon-style"></i>
+          </button>
+          <input id="form1" min="0" name="quantity" value="${
+            product.saleQuantity
+          }" type="number"
+                      class="form-control form-control-sm" />
+            <button class="btn btn-link"
+            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+            <i class="bi bi-plus h4 icon-style"></i>
+            </button>
+  
+            </div>
+          <div class="d-flex  justify-content-center align-items-center">
+          <h5 class="m-1">Product Total: ${formatNumberValues(
+            product.price * product.saleQuantity
+          )}</h5>
+          <a href="#!" class="text-danger"><i class="bi bi-trash h4 icon-style"></i></a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+function createMainPageItemHTML(product) {
+  return `
+  <div class="col mb-5">
+  <div class="card h-100">
+    <!-- Product image-->
+    <img class="card-img-top" src="${product.image}" id="1" alt="..." />
+    <!-- Product details-->
+    <div class="card-body p-4">
+      <div class="text-center">
+        <!-- Product name-->
+        <h5 class="fw-bolder">${product.name}</h5>
+        <!-- Product price-->
+        ${formatNumberValues(product.price)}
+      </div>
+    </div>
+    <!-- Product actions-->
+    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+      <div class="text-center"><a id="${
+        product.id
+      }" class="btn btn-outline-dark mt-auto btnAdd" href="#">Add to cart</a>
+      </div>
+    </div>
+  </div>
+</div>
+  `;
+}
+function createCartTotalHTML() {
+  const vatAmount = totalAmount() * 0.2;
+  return `<div class="m-4 totalDiv-style">
+<h5 class="m-3 d-flex justify-content-between"><span class="me-5">Total item:</span>${totalItems()}</h5>
+<h5 class="m-3 d-flex justify-content-between"><span class="me-5">Subtotal:</span>${formatNumberValues(
+    totalAmount() - vatAmount
+  )}</h5>
+<h5 class="m-3 d-flex justify-content-between"><span class="me-5">VAT (20%)</span>${formatNumberValues(
+    vatAmount
+  )}</h5>
+<hr>
+<h5 class="m-3 d-flex justify-content-between"><span class="me-5">Total:</span>${formatNumberValues(
+    totalAmount()
+  )}</h5>
+</div>`;
 }

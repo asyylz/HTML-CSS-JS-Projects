@@ -43,6 +43,7 @@ input#form1 {
 div#offcanvasRight {
     background-color: rgba(0, 0, 0, 0.4);
     color: var(--text-color);
+    border-radius: 6px;
 }
 
 div.card.rounded-3.mb-2 {
@@ -52,6 +53,7 @@ div.card.rounded-3.mb-2 {
 .offcanvas-header {
     background-color: var(--background-color);
     border: 0.1px solid var(--text-color);
+    border-radius: 6px;
 }
 
 .totalDiv-style {
