@@ -29,6 +29,7 @@ li.nav-item,
 button.btn-outline-dark {
     color: var(--text-color);
     font-size: 1.1rem !important;
+    border: .1px solid var(--text-color);
 }
 
 .card.rounded-3.mb-2 {

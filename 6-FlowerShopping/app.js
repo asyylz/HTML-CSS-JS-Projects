@@ -3,7 +3,6 @@
 fetch("products.json")
   .then((response) => response.json())
   .then((data) => {
-    populateProductImages(data);
     localStorage.setItem("products", JSON.stringify(data));
     if (!localStorage.getItem("cart")) {
       localStorage.setItem("cart", "[]");
@@ -81,26 +80,17 @@ function btnsAddSelect() {
   btnsAdd.forEach((btn) => {
     btn.addEventListener("click", function (e) {
       e.preventDefault();
-      const productId = parseInt(this.getAttribute("id"));
+      const productId = e.target.closest(".col.mb-5").getAttribute("id");
       addProductToCart(productId);
       retriveData();
     });
   });
 }
-function populateProductImages(data) {
-  for (let i = 0; i < data.length; i++) {
-    const imgURL = data[i].image;
-    const imgElement = document.getElementById(`${i + 1}`);
-    if (imgElement) {
-      imgElement.src = imgURL;
-    }
-  }
-}
 function updateCart() {
   const basketCount = document.querySelector("span.badge.basket");
   const basketTotal = document.querySelector("span.badge.basket-total");
   basketCount.textContent = totalItems();
-  basketTotal.textContent = totalAmount();
+  basketTotal.textContent = formatNumberValues(totalAmount());
 }
 function totalItems() {
   return cart.reduce((total, product) => total + product.saleQuantity, 0);
@@ -121,7 +111,7 @@ function retriveData() {
     offCanvasBody.insertAdjacentHTML("beforeend", item);
   });
 
- offCanvasBody.insertAdjacentHTML("beforeend", createCartTotalHTML());
+  offCanvasBody.insertAdjacentHTML("beforeend", createCartTotalHTML());
 
   const container = document.querySelector("div.container .row");
   container.innerHTML = "";
@@ -130,9 +120,12 @@ function retriveData() {
     container.insertAdjacentHTML("beforeend", displayProduct);
   });
   updateCart();
+  btnsAddSelect();
 }
 function addProductToCart(productId) {
-  const selectedProduct = products.find((product) => product.id === productId);
+  const selectedProduct = products.find(
+    (product) => product.id === parseInt(productId)
+  );
   if (!selectedProduct) {
     console.error(`Product with ID ${productId} not found.`);
     return;
@@ -222,7 +215,7 @@ function createCartItemHTML(product) {
 }
 function createMainPageItemHTML(product) {
   return `
-  <div class="col mb-5">
+  <div class="col mb-5" id="${product.id}">
   <div class="card h-100">
     <!-- Product image-->
     <img class="card-img-top" src="${product.image}" id="1" alt="..." />
