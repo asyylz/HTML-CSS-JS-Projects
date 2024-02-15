@@ -25,10 +25,6 @@ body {
     font-family: Arial;
 }
 
-.fa-sun-o {
-    font-size: 22px;
-}
-
 .card2 {
     background-color: #607D8B;
     padding: 0px 0px 40px 40px;
@@ -94,4 +90,10 @@ input:focus {
     .card1 {
         padding-left: 26px;
     }
+}
+
+
+img.icon{
+    width: 50%;
+    height: 50%;
 }
