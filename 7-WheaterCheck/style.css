@@ -2,20 +2,17 @@ body {
     color: #fff;
     overflow-x: hidden;
 }
-
 .container {
     background-image: url(/assets/background.jpg);
     background-size: cover;
     border-radius: 1rem;
 }
-
 .side-info {
     margin: 10px 10px 10px 0px;
     padding: 10px;
     background-color: rgba(0, 0, 0, 0.2) !important;
     border-radius: 10px;
 }
-
 .card0 {
     width: 80%;
 }
@@ -23,11 +20,6 @@ body {
 .card1 {
     padding: 30px 20px 30px 50px;
     border-radius: 2rem !important;
-}
-
-.image {
-    width: 30px;
-    height: 30px;
 }
 
 .large-font {
@@ -51,6 +43,23 @@ input:focus {
     border-bottom: 1px solid #fff !important;
     outline-width: 0;
     font-weight: 400;
+}
+
+.icondiv {
+    position: relative;
+}
+
+p.icon-text {
+    position: absolute;
+    bottom: 0rem;
+    left: 67%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    font-weight: 500;
+}
+img.icon{
+    height: 50%;
+    width: 50%;
 }
 
 .fa-search {
@@ -89,8 +98,8 @@ input:focus {
     background-color: #B0BEC5;
 }
 
-@media screen and (max-width: 500px) {
+/* @media screen and (max-width: 500px) {
     .card1 {
         padding-left: 26px;
     }
-}
+} */
