@@ -1,5 +1,6 @@
+/* -------------------- DOM variables ------------------- */
 const citySearchInput = document.querySelector("input.mb-5");
-const cityName = document.querySelector("h2.mt-3.mb-0");
+const cityName = document.querySelector("h2");
 const weatherDegree = document.querySelector("h1.large-font.mr-3");
 const timeAndDate = document.querySelector("small.time-and-date");
 const icontext = document.querySelector("small.icon-text");
@@ -8,37 +9,33 @@ const cloudy = document.querySelector(".cloud p.ml-auto");
 const wind = document.querySelector(".wind p.ml-auto");
 const humidity = document.querySelector(".humidity p.ml-auto");
 const pressure = document.querySelector(".pressure p.ml-auto");
-const optCity1 = document.querySelector(".optcity__one");
-const optCity2 = document.querySelector(".optcity__two");
-const optCity3 = document.querySelector(".optcity__three");
-const optCity4 = document.querySelector(".optcity__four");
-
+const optCity1 = document.querySelector(".optcity.one");
+const optCity2 = document.querySelector(".optcity.two");
+const optCity3 = document.querySelector(".optcity.three");
+const optCity4 = document.querySelector(".optcity.four");
+/* ------------------------- API ------------------------ */
 let cityData = [];
 const apiKey = "b8b2bc6cc3def4c8452b6812772a682f";
 const defaultCity = "london";
 async function fetchWeatherData(city) {
-    try {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-      );
-      if (!response.ok) {
-        throw new Error("There was an error with the URL");
-      }
-      const data = await response.json();
-      const cityData = [data];
-      console.log(cityData);
-      retriveWeatherData(cityData);
-    } catch (error) {
-      handleApiError(error);
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+    );
+    if (!response.ok) {
+      throw new Error("There was an error with the URL");
     }
+    const data = await response.json();
+    const cityData = [data];
+    retriveWeatherData(cityData);
+  } catch (error) {
+    console.error("An error occurred:", error);
   }
-  
-function handleApiError(error) {
-  console.error("An error occurred:", error);
 }
-
+/* ---------------------- Listeners --------------------- */
 document.addEventListener("DOMContentLoaded", () => {
   fetchWeatherData(defaultCity);
+  optionalCities();
 });
 
 citySearchInput.addEventListener("keydown", function (e) {
@@ -49,8 +46,9 @@ citySearchInput.addEventListener("keydown", function (e) {
     fetchWeatherData(city);
   }
 });
-
+/* ---------------------- functions --------------------- */
 function retriveWeatherData(citySelected) {
+    console.log(citySelected)
   cityName.textContent = citySelected[0].name;
   weatherDegree.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
   timeAndDate.textContent = formatTimeAndDate(citySelected[0].timezone);
@@ -60,6 +58,8 @@ function retriveWeatherData(citySelected) {
   wind.textContent = `${citySelected[0].wind.speed.toFixed(2)} km/h`;
   humidity.textContent = `${citySelected[0].main.humidity}%`;
   pressure.textContent = `${citySelected[0].main.pressure.toFixed(0)} hPa`;
+  
+
 }
 
 function formatTimeAndDate(timezoneOffsetMs) {
@@ -107,3 +107,43 @@ function formatTimeAndDate(timezoneOffsetMs) {
   const formattedDateTime = `${hours}:${minutes} - ${dayOfWeek}-${dayOfMonth} ${monthName} ${year}`;
   return formattedDateTime;
 }
+
+async function optionalCities() {
+    const optionalCitiesArray = ["birmingham", "manchester", "new york", "prague"];
+  
+    for (const city of optionalCitiesArray) {
+      try {
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+        );
+        if (!response.ok) {
+          throw new Error(`Failed to fetch weather data for ${city}`);
+        }
+        const data = await response.json();
+        const cityData = [data];
+        displayOptionalCityData(cityData, city);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+  
+  function displayOptionalCityData(citySelected, cityName) {
+    switch (cityName) {
+      case "birmingham":
+        optCity1.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
+        break;
+      case "manchester":
+        optCity2.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
+        break;
+      case "new york":
+        optCity3.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
+        break;
+      case "prague":
+        optCity4.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
+        break;
+      default:
+        break;
+    }
+  }
+  

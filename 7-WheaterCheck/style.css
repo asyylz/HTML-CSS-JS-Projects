@@ -1,23 +1,32 @@
 body {
     color: #fff;
     overflow-x: hidden;
-    height: 100%;
-    background-image: linear-gradient(#81D4FA, #2196F3);
-    background-repeat: no-repeat;
 }
 
+.container {
+    background-image: url(/assets/background.jpg);
+    background-size:cover;
+    border-radius: 1rem;
+}
+
+.col-4.side-info {
+    margin: 10px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
 .card0 {
-    width: 94%;
+    width: 80%;
 }
 
 .card1 {
-    background-image: linear-gradient(#2196F3, #81D4FA);
     padding: 30px 20px 30px 50px;
+    border-radius: 2rem !important;
 }
 
 .image {
-    width: 300px;
-    height: 300px;
+    width: 30px;
+    height: 30px;
 }
 
 .large-font {
@@ -25,22 +34,14 @@ body {
     font-family: Arial;
 }
 
-.card2 {
-    background-color: #607D8B;
-    padding: 0px 0px 40px 40px;
-}
-
 input {
-    background-color: #607D8B;
-    padding: 24px 0px 12px 0px !important;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-left: 10px;
     width: 80%;
     box-sizing: border-box;
     border: none !important;
-    border-bottom: 1px solid #CFD8DC !important;
-    font-size: 16px !important;
-    color: #fff !important;
+    color: #E1F5FE;
 }
-
 input:focus {
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
@@ -48,6 +49,18 @@ input:focus {
     border-bottom: 1px solid #fff !important;
     outline-width: 0;
     font-weight: 400;
+}
+.fa-search {
+    color: #607D8B;
+    background-color: #E1F5FE;
+    font-size: 20px;
+    padding: 20px;
+    width: 20%;
+    cursor: pointer;
+}
+
+.row.px-3{
+    font-size: 1.1rem !important;
 }
 
 ::placeholder {
@@ -63,26 +76,13 @@ input:focus {
     color: #B0BEC5 !important;
 }
 
-.fa-search {
-    color: #607D8B;
-    background-color: #E1F5FE;
-    font-size: 20px;
-    padding: 20px;
-    width: 20%;
-    cursor: pointer;
-}
-
-.light-text {
-    color: #B0BEC5;
-}
-
 .suggestion:hover {
     color: #fff;
     cursor: pointer;
 }
 
 .line {
-    height: 1px;
+    height: 3px;
     background-color: #B0BEC5;
 }
 
@@ -90,10 +90,4 @@ input:focus {
     .card1 {
         padding-left: 26px;
     }
-}
-
-
-img.icon{
-    width: 50%;
-    height: 50%;
 }
