@@ -106,14 +106,8 @@ function formatTimeAndDate(timezoneOffsetMs) {
   return formattedDateTime;
 }
 
+const optionalCitiesArray = ["Birmingham", "Manchester", "New York", "Prague"];
 async function optionalCities() {
-  const optionalCitiesArray = [
-    "birmingham",
-    "manchester",
-    "new york",
-    "prague",
-  ];
-
   for (const city of optionalCitiesArray) {
     try {
       const response = await fetch(
@@ -150,3 +144,16 @@ function displayOptionalCityData(citySelected) {
       break;
   }
 }
+/* ---------------------- option 2 ---------------------- */
+// function displayOptionalCityData(citySelected) {
+//     const { main, name } = citySelected;
+//     const elements = document.querySelectorAll(".optcity");
+//     optionalCitiesArray.forEach((optionalCity) => {
+//       elements.forEach((element) => {
+//         if (element.textContent === name) {
+//           element.textContent = main.temp.toFixed(0) + "°C";
+//         }
+//       });
+//     });
+//   }
+  
