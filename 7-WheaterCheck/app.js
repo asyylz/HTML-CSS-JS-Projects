@@ -19,7 +19,7 @@ const container = document.querySelector(".container");
 let cityData = [];
 let currentSunRise, currentSunSet;
 const apiKey = "b8b2bc6cc3def4c8452b6812772a682f";
-const defaultCity = "tokyo";
+const defaultCity = "new york";
 async function fetchWeatherData(city) {
   try {
     const response = await fetch(
@@ -85,16 +85,58 @@ function retriveWeatherData(citySelected) {
   pressure.textContent = `${main.pressure.toFixed(0)} hPa`;
 }
 
+const optionalCitiesArray = ["Birmingham", "Manchester", "New York", "Prague"];
+async function optionalCities() {
+  for (const city of optionalCitiesArray) {
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+      );
+      if (!response.ok) {
+        throw new Error(`Failed to fetch weather data for ${city}`);
+      }
+      const data = await response.json();
+      const { main, name } = data;
+      displayOptionalCityData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
+function displayOptionalCityData(citySelected) {
+  const { main, name } = citySelected;
+  switch (name) {
+    case "Birmingham":
+      optCity1.textContent = main.temp.toFixed(0) + "°C";
+      break;
+    case "Manchester":
+      optCity2.textContent = main.temp.toFixed(0) + "°C";
+      break;
+    case "New York":
+      optCity3.textContent = main.temp.toFixed(0) + "°C";
+      break;
+    case "Prague":
+      optCity4.textContent = main.temp.toFixed(0) + "°C";
+      break;
+    default:
+      break;
+  }
+}
+
+function formatTimeComponents(date) {
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+  return `${hours}:${minutes}:${seconds}`;
+}
 function formatTimeAndDate(timezoneOffsetMs) {
   timezoneOffsetMs = timezoneOffsetMs * 1000;
   const currentTimeMs = Date.now();
   const timeInSpecifiedTimezone = new Date(currentTimeMs + timezoneOffsetMs);
 
-  // Extract hours, minutes, and seconds from the time
   const hours = timeInSpecifiedTimezone.getUTCHours();
   const minutes = timeInSpecifiedTimezone.getUTCMinutes();
 
-  // Extract date components
   const days = [
     "Sunday",
     "Monday",
@@ -124,59 +166,12 @@ function formatTimeAndDate(timezoneOffsetMs) {
     "0"
   );
   const monthName = months[timeInSpecifiedTimezone.getUTCMonth()];
-  const year = String(timeInSpecifiedTimezone.getUTCFullYear()); // Get last 2 digits of the year
+  const year = String(timeInSpecifiedTimezone.getUTCFullYear());
 
-  // Format the date and time
   const formattedDateTime = `${hours.toString().padStart(2, "0")}:${minutes
     .toString()
     .padStart(2, "0")} - ${dayOfWeek}-${dayOfMonth} ${monthName} ${year}`;
   return formattedDateTime;
-}
-//console.log(formatTimeAndDate('1708118838'))
-const optionalCitiesArray = ["Birmingham", "Manchester", "New York", "Prague"];
-async function optionalCities() {
-  for (const city of optionalCitiesArray) {
-    try {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-      );
-      if (!response.ok) {
-        throw new Error(`Failed to fetch weather data for ${city}`);
-      }
-      const data = await response.json();
-      const { main, name } = data;
-      displayOptionalCityData(data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-}
-
-function displayOptionalCityData(citySelected) {
-  const { main, name } = citySelected;
-  switch (name) {
-    case "Birmingham":
-      optCity1.textContent = main.temp.toFixed(0) + "°C";
-      break;
-    case "Manchester":
-      optCity2.textContent = main.temp.toFixed(0) + "°C";
-      break;
-    case "New York":
-      optCity3.textContent = main.temp.toFixed(0) + "°C";
-      break;
-    case "Prague":
-      optCity4.textContent = main.temp.toFixed(0) + "°C";
-      break;
-    default:
-      break;
-  }
-}
-
-function formatTimeComponents(date) {
-  const hours = String(date.getHours()).padStart(2, "0");
-  const minutes = String(date.getMinutes()).padStart(2, "0");
-  const seconds = String(date.getSeconds()).padStart(2, "0");
-  return `${hours}:${minutes}:${seconds}`;
 }
 
 function sunRiseAndSetCovertor(sunrise, sunset, timezoneOffsetSeconds) {

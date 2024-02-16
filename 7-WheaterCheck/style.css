@@ -4,7 +4,7 @@ body {
 
 :root {
     --night--theme-color1: #FFBABC;
-    --night--theme-color2: #001990;
+    --night--theme-color2: #0F0840;
     --nigth--theme-color3: #E1F5FE;
     --day--theme-color1: #0D2840;
     --day--theme-color2: #F67977;
@@ -29,7 +29,6 @@ body {
     border-radius: 2rem;
     margin-bottom: 5px;
     height: 2rem;
-  
 }
 
 ::placeholder {
@@ -52,7 +51,8 @@ div.mr-2 {
 }
 
 div.mr-2 h3 {
-    color: var(--night--theme-color1);
+    color: var(--night--theme-color2);
+  
 }
 
 .card0 {
@@ -70,7 +70,7 @@ div.mr-2 h3 {
 }
 
 input {
-    background-color: rgba(64, 59, 126, 0.7);
+    background-color: rgba(64, 59, 126, 0.5);
     padding-left: 10px;
     width: 80%;
     box-sizing: border-box;
@@ -122,8 +122,9 @@ img.icon {
 .day-theme.side-info {
     margin: 10px 10px 10px 0px;
     padding: 10px;
-    background-color: rgba(242, 242, 242, 0.3);
+    /* background-color: rgba(242, 242, 242, 0.3); */
     border-radius: 10px;
+    background-color: none !important;
 }
 
 .day-theme ::placeholder {
@@ -158,4 +159,8 @@ img.icon {
 .day-theme .fa-search {
     color: var(--day--theme-color2);
     background-color: var(--day--theme-color3);
+}
+
+.day-theme .row.px-3 {
+    background-color: rgba(130, 194, 193, 0.7)!important;
 }
