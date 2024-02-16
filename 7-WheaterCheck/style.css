@@ -5,16 +5,17 @@ body {
 
 .container {
     background-image: url(/assets/background.jpg);
-    background-size:cover;
+    background-size: cover;
     border-radius: 1rem;
 }
 
-.col-4.side-info {
-    margin: 10px;
+.side-info {
+    margin: 10px 10px 10px 0px;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.2) !important;
     border-radius: 10px;
 }
+
 .card0 {
     width: 80%;
 }
@@ -42,6 +43,7 @@ input {
     border: none !important;
     color: #E1F5FE;
 }
+
 input:focus {
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
@@ -50,6 +52,7 @@ input:focus {
     outline-width: 0;
     font-weight: 400;
 }
+
 .fa-search {
     color: #607D8B;
     background-color: #E1F5FE;
@@ -59,7 +62,7 @@ input:focus {
     cursor: pointer;
 }
 
-.row.px-3{
+.row.px-3 {
     font-size: 1.1rem !important;
 }
 

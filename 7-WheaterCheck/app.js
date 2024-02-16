@@ -26,8 +26,11 @@ async function fetchWeatherData(city) {
       throw new Error("There was an error with the URL");
     }
     const data = await response.json();
-    const cityData = [data];
-    retriveWeatherData(cityData);
+    console.log(data);
+    //const cityData = [data];
+    //const { main, timezone, clouds, wind, weather, name } = data;
+    retriveWeatherData(data);
+    console.log(data);
   } catch (error) {
     console.error("An error occurred:", error);
   }
@@ -42,24 +45,21 @@ citySearchInput.addEventListener("keydown", function (e) {
   if (e.keyCode === 13) {
     e.preventDefault();
     let city = e.target.value;
-    console.log(city);
     fetchWeatherData(city);
   }
 });
 /* ---------------------- functions --------------------- */
 function retriveWeatherData(citySelected) {
-    console.log(citySelected)
-  cityName.textContent = citySelected[0].name;
-  weatherDegree.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
-  timeAndDate.textContent = formatTimeAndDate(citySelected[0].timezone);
-  icontext.textContent = citySelected[0].weather[0].description;
-  icon.src = `https://openweathermap.org/img/wn/${citySelected[0].weather[0].icon}@2x.png`;
-  cloudy.textContent = `${citySelected[0].clouds.all}%`;
-  wind.textContent = `${citySelected[0].wind.speed.toFixed(2)} km/h`;
-  humidity.textContent = `${citySelected[0].main.humidity}%`;
-  pressure.textContent = `${citySelected[0].main.pressure.toFixed(0)} hPa`;
-  
-
+  const { main, timezone, clouds, wind, weather, name } = citySelected;
+  cityName.textContent = name;
+  weatherDegree.textContent = main.temp.toFixed(0) + "°C";
+  timeAndDate.textContent = formatTimeAndDate(timezone);
+  icontext.textContent = weather[0].description;
+  icon.src = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
+  cloudy.textContent = `${clouds.all}%`;
+  wind.textContent = `${wind.speed.toFixed(2)} km/h`;
+  humidity.textContent = `${main.humidity}%`;
+  pressure.textContent = `${main.pressure.toFixed(0)} hPa`;
 }
 
 function formatTimeAndDate(timezoneOffsetMs) {
@@ -109,41 +109,45 @@ function formatTimeAndDate(timezoneOffsetMs) {
 }
 
 async function optionalCities() {
-    const optionalCitiesArray = ["birmingham", "manchester", "new york", "prague"];
-  
-    for (const city of optionalCitiesArray) {
-      try {
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-        );
-        if (!response.ok) {
-          throw new Error(`Failed to fetch weather data for ${city}`);
-        }
-        const data = await response.json();
-        const cityData = [data];
-        displayOptionalCityData(cityData, city);
-      } catch (error) {
-        console.error(error);
+  const optionalCitiesArray = [
+    "birmingham",
+    "manchester",
+    "new york",
+    "prague",
+  ];
+
+  for (const city of optionalCitiesArray) {
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+      );
+      if (!response.ok) {
+        throw new Error(`Failed to fetch weather data for ${city}`);
       }
+      const data = await response.json();
+      const cityData = [data];
+      displayOptionalCityData(cityData, city);
+    } catch (error) {
+      console.error(error);
     }
   }
-  
-  function displayOptionalCityData(citySelected, cityName) {
-    switch (cityName) {
-      case "birmingham":
-        optCity1.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
-        break;
-      case "manchester":
-        optCity2.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
-        break;
-      case "new york":
-        optCity3.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
-        break;
-      case "prague":
-        optCity4.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
-        break;
-      default:
-        break;
-    }
+}
+
+function displayOptionalCityData(citySelected, cityName) {
+  switch (cityName) {
+    case "birmingham":
+      optCity1.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
+      break;
+    case "manchester":
+      optCity2.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
+      break;
+    case "new york":
+      optCity3.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
+      break;
+    case "prague":
+      optCity4.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
+      break;
+    default:
+      break;
   }
-  
+}
