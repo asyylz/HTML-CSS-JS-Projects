@@ -14,12 +14,12 @@ const optCity2 = document.querySelector(".optcity.two");
 const optCity3 = document.querySelector(".optcity.three");
 const optCity4 = document.querySelector(".optcity.four");
 const container = document.querySelector(".container");
-console.log(container);
+
 /* ------------------------- API ------------------------ */
 let cityData = [];
-let currentTimezone;
+let currentSunRise, currentSunSet;
 const apiKey = "b8b2bc6cc3def4c8452b6812772a682f";
-const defaultCity = "london";
+const defaultCity = "tokyo";
 async function fetchWeatherData(city) {
   try {
     const response = await fetch(
@@ -29,24 +29,33 @@ async function fetchWeatherData(city) {
       throw new Error("There was an error with the URL");
     }
     const data = await response.json();
-    const { timezone } = data;
-    currentTimezone = timezone;
-    changeBackgroundColor(formatTimeAndDate(currentTimezone));
+    const { timezone, sys } = data;
+    console.log(timezone);
+    currentSunRise = sys.sunrise;
+    currentSunSet = sys.sunset;
+    console.log(currentSunRise);
+    changeBackgroundColor(
+      sunRiseAndSetCovertor(currentSunRise, currentSunSet, timezone)
+    );
     retriveWeatherData(data);
   } catch (error) {
     console.error("An error occurred:", error);
   }
 }
 
-function changeBackgroundColor(time) {
-  console.log(typeof time);
-  const hours = time.slice(0, 2);
-  console.log(hours);
-  const isNightTime = hours >= 20 || hours <= 6;
+function changeBackgroundColor(sunRiseAndSet) {
+  console.log(sunRiseAndSet);
+  const sunrise = sunRiseAndSet.sunrise.slice(0, 2);
+  const sunset = sunRiseAndSet.sunset.slice(0, 2);
+  const localTime = sunRiseAndSet.currentCityLocalTime.slice(0, 2);
+  console.log(localTime, sunrise, sunset);
+  const isNightTime = localTime < sunrise || localTime > sunset;
   if (isNightTime) {
     container.style.backgroundImage = 'url("./assets/night.jpg")';
+    container.classList.remove("day-theme");
   } else {
-    container.style.backgroundImage = 'url("./assets/day1.jpg")';
+    container.style.backgroundImage = 'url("./assets/day.jpg")';
+    container.classList.add("day-theme");
   }
 }
 /* ---------------------- Listeners --------------------- */
@@ -123,7 +132,7 @@ function formatTimeAndDate(timezoneOffsetMs) {
     .padStart(2, "0")} - ${dayOfWeek}-${dayOfMonth} ${monthName} ${year}`;
   return formattedDateTime;
 }
-
+//console.log(formatTimeAndDate('1708118838'))
 const optionalCitiesArray = ["Birmingham", "Manchester", "New York", "Prague"];
 async function optionalCities() {
   for (const city of optionalCitiesArray) {
@@ -161,4 +170,29 @@ function displayOptionalCityData(citySelected) {
     default:
       break;
   }
+}
+
+function formatTimeComponents(date) {
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+  return `${hours}:${minutes}:${seconds}`;
+}
+
+function sunRiseAndSetCovertor(sunrise, sunset, timezoneOffsetSeconds) {
+
+  const timeSunrise = new Date(sunrise * 1000);
+  const timeSunset = new Date(sunset * 1000);
+
+  timeSunrise.setSeconds(timeSunrise.getSeconds() + timezoneOffsetSeconds);
+  timeSunset.setSeconds(timeSunset.getSeconds() + timezoneOffsetSeconds);
+
+  const sunriseClockFormat = formatTimeComponents(timeSunrise);
+  const sunsetClockFormat = formatTimeComponents(timeSunset);
+
+  return {
+    sunrise: sunriseClockFormat,
+    sunset: sunsetClockFormat,
+    currentCityLocalTime: formatTimeAndDate(timezoneOffsetSeconds),
+  };
 }
