@@ -26,11 +26,9 @@ async function fetchWeatherData(city) {
       throw new Error("There was an error with the URL");
     }
     const data = await response.json();
-    console.log(data);
     //const cityData = [data];
     //const { main, timezone, clouds, wind, weather, name } = data;
     retriveWeatherData(data);
-    console.log(data);
   } catch (error) {
     console.error("An error occurred:", error);
   }
@@ -125,27 +123,28 @@ async function optionalCities() {
         throw new Error(`Failed to fetch weather data for ${city}`);
       }
       const data = await response.json();
-      const cityData = [data];
-      displayOptionalCityData(cityData, city);
+      const { main, name } = data;
+      displayOptionalCityData(data);
     } catch (error) {
       console.error(error);
     }
   }
 }
 
-function displayOptionalCityData(citySelected, cityName) {
-  switch (cityName) {
-    case "birmingham":
-      optCity1.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
+function displayOptionalCityData(citySelected) {
+  const { main, name } = citySelected;
+  switch (name) {
+    case "Birmingham":
+      optCity1.textContent = main.temp.toFixed(0) + "°C";
       break;
-    case "manchester":
-      optCity2.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
+    case "Manchester":
+      optCity2.textContent = main.temp.toFixed(0) + "°C";
       break;
-    case "new york":
-      optCity3.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
+    case "New York":
+      optCity3.textContent = main.temp.toFixed(0) + "°C";
       break;
-    case "prague":
-      optCity4.textContent = citySelected[0].main.temp.toFixed(0) + "°C";
+    case "Prague":
+      optCity4.textContent = main.temp.toFixed(0) + "°C";
       break;
     default:
       break;
