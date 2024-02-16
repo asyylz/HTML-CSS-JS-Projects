@@ -2,17 +2,19 @@ body {
     color: #fff;
     overflow-x: hidden;
 }
+
 .container {
-    background-image: url(/assets/background.jpg);
-    background-size: cover;
+    /* background-image: url(./assets/night.jpg); */
     border-radius: 1rem;
 }
+
 .side-info {
     margin: 10px 10px 10px 0px;
     padding: 10px;
     background-color: rgba(0, 0, 0, 0.2) !important;
     border-radius: 10px;
 }
+
 .card0 {
     width: 80%;
 }
@@ -57,9 +59,15 @@ p.icon-text {
     font-size: 13px;
     font-weight: 500;
 }
-img.icon{
+
+img.icon {
     height: 50%;
     width: 50%;
+}
+
+img {
+    height: 30px;
+    width: 30px;
 }
 
 .fa-search {

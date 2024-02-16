@@ -13,8 +13,11 @@ const optCity1 = document.querySelector(".optcity.one");
 const optCity2 = document.querySelector(".optcity.two");
 const optCity3 = document.querySelector(".optcity.three");
 const optCity4 = document.querySelector(".optcity.four");
+const container = document.querySelector(".container");
+console.log(container);
 /* ------------------------- API ------------------------ */
 let cityData = [];
+let currentTimezone;
 const apiKey = "b8b2bc6cc3def4c8452b6812772a682f";
 const defaultCity = "london";
 async function fetchWeatherData(city) {
@@ -26,11 +29,24 @@ async function fetchWeatherData(city) {
       throw new Error("There was an error with the URL");
     }
     const data = await response.json();
-    //const cityData = [data];
-    //const { main, timezone, clouds, wind, weather, name } = data;
+    const { timezone } = data;
+    currentTimezone = timezone;
+    changeBackgroundColor(formatTimeAndDate(currentTimezone));
     retriveWeatherData(data);
   } catch (error) {
     console.error("An error occurred:", error);
+  }
+}
+
+function changeBackgroundColor(time) {
+  console.log(typeof time);
+  const hours = time.slice(0, 2);
+  console.log(hours);
+  const isNightTime = hours >= 20 || hours <= 6;
+  if (isNightTime) {
+    container.style.backgroundImage = 'url("./assets/night.jpg")';
+  } else {
+    container.style.backgroundImage = 'url("./assets/day1.jpg")';
   }
 }
 /* ---------------------- Listeners --------------------- */
@@ -102,7 +118,9 @@ function formatTimeAndDate(timezoneOffsetMs) {
   const year = String(timeInSpecifiedTimezone.getUTCFullYear()); // Get last 2 digits of the year
 
   // Format the date and time
-  const formattedDateTime = `${hours}:${minutes} - ${dayOfWeek}-${dayOfMonth} ${monthName} ${year}`;
+  const formattedDateTime = `${hours.toString().padStart(2, "0")}:${minutes
+    .toString()
+    .padStart(2, "0")} - ${dayOfWeek}-${dayOfMonth} ${monthName} ${year}`;
   return formattedDateTime;
 }
 
@@ -144,16 +162,3 @@ function displayOptionalCityData(citySelected) {
       break;
   }
 }
-/* ---------------------- option 2 ---------------------- */
-// function displayOptionalCityData(citySelected) {
-//     const { main, name } = citySelected;
-//     const elements = document.querySelectorAll(".optcity");
-//     optionalCitiesArray.forEach((optionalCity) => {
-//       elements.forEach((element) => {
-//         if (element.textContent === name) {
-//           element.textContent = main.temp.toFixed(0) + "°C";
-//         }
-//       });
-//     });
-//   }
-  
