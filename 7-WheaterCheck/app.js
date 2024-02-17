@@ -2,7 +2,8 @@
 const citySearchInput = document.querySelector("input.mb-5");
 const cityName = document.querySelector("h2");
 const weatherDegree = document.querySelector("h1.large-font.mr-3");
-const timeAndDate = document.querySelector("small.time-and-date");
+const time = document.querySelector("small.time");
+const date = document.querySelector("small.date");
 const icontext = document.querySelector("p.icon-text");
 const icon = document.querySelector("img.icon");
 const cloudy = document.querySelector(".cloud p.ml-auto");
@@ -20,7 +21,7 @@ const locationIcon = document.getElementById("location");
 let cityData = [];
 let currentSunRise, currentSunSet;
 const apiKey = "b8b2bc6cc3def4c8452b6812772a682f";
-const defaultCity = "new york";
+const defaultCity = "konya";
 async function fetchWeatherData(city) {
   try {
     const response = await fetch(
@@ -89,7 +90,8 @@ function retriveWeatherData(citySelected) {
   const { main, timezone, clouds, wind, weather, name } = citySelected;
   cityName.textContent = name;
   weatherDegree.textContent = main.temp.toFixed(0) + "°C";
-  timeAndDate.textContent = formatTimeAndDate(timezone);
+  time.textContent = formatTimeAndDate(timezone).slice(0,5);
+  date.textContent = formatTimeAndDate(timezone).slice(5);
   icontext.textContent = weather[0].description;
   icon.src = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
   cloudy.textContent = `${clouds.all}%`;
@@ -183,7 +185,7 @@ function formatTimeAndDate(timezoneOffsetMs) {
 
   const formattedDateTime = `${hours.toString().padStart(2, "0")}:${minutes
     .toString()
-    .padStart(2, "0")} - ${dayOfWeek}-${dayOfMonth} ${monthName} ${year}`;
+    .padStart(2, "0")}${dayOfWeek}-${dayOfMonth} ${monthName} ${year}`;
   return formattedDateTime;
 }
 

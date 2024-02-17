@@ -63,6 +63,9 @@ div.mr-2 h3 {
     padding: 30px 20px 30px 50px;
     border-radius: 2rem !important;
 }
+.card1.d-lg-flex{
+    height: 150px;
+}
 
 .large-font {
     font-size: 70px;
@@ -76,7 +79,7 @@ input {
     box-sizing: border-box;
     border: none !important;
     color: var(--night--theme-color1);
-    border: 1px solid var(--night--theme-color1) !important;
+    border: 1px solid var(--night--theme-color1)!important;
 }
 
 input:focus {
@@ -94,7 +97,7 @@ input:focus {
 p.icon-text {
     position: absolute;
     bottom: 4rem;
-    left: 67%;
+    right: -7rem;
     transform: translateX(-50%);
     font-size: 1rem;
     font-weight: 500;
@@ -103,7 +106,14 @@ p.icon-text {
 img.icon {
     height: 100%;
     width: 100%;
+    margin-right: 10px;
 }
+#location {
+    cursor: pointer;
+    position: absolute;
+    left: 2rem;
+    top:5rem;
+}  
 
 .fa-search {
     color: #607D8B;
@@ -123,9 +133,7 @@ img.icon {
     font-size: 2rem;
 }
 
-#location {
-    cursor: pointer;
-}
+
 
 /* ---------------------- day-theme --------------------- */
 .container.day-theme {
@@ -141,7 +149,7 @@ img.icon {
 }
 
 .day-theme ::placeholder {
-    color: var(--day--theme-color2) !important;
+    color: var(--day--theme-color1) !important;
     opacity: 1;
 }
 
@@ -166,12 +174,13 @@ img.icon {
 .day-theme input {
     background-color: var(--day--theme-color3) !important;
     color: var(--day--theme-color1);
-    border: none !important;
+    border: 2px solid var(--day--theme-color2)!important;
 }
 
 .day-theme .fa-search {
-    color: var(--day--theme-color2);
-    background-color: var(--day--theme-color3);
+    color: var(--day--theme-color3);
+    background-color: var(--day--theme-color2);
+ 
 }
 
 .day-theme .row.px-3 {
