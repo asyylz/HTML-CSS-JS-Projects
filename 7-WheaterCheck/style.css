@@ -28,11 +28,11 @@ body {
     background-color: rgba(255, 186, 188, 0.5) !important;
     border-radius: 2rem;
     margin-bottom: 5px;
-    height: 2rem;
+    height: 2.5rem;
 }
 
 ::placeholder {
-    color: var(--nigth--theme-color3) !important;
+    color: var(--night--theme-color1) !important;
     opacity: 1;
 }
 
@@ -52,7 +52,7 @@ div.mr-2 {
 
 div.mr-2 h3 {
     color: var(--night--theme-color2);
-  
+
 }
 
 .card0 {
@@ -76,7 +76,7 @@ input {
     box-sizing: border-box;
     border: none !important;
     color: var(--night--theme-color1);
-    border: 1px solid #fff !important;
+    border: 1px solid var(--night--theme-color1) !important;
 }
 
 input:focus {
@@ -107,10 +107,23 @@ img.icon {
 
 .fa-search {
     color: #607D8B;
-    background-color: var(--nigth--theme-color3);
+    background-color: var(--night--theme-color1);
     font-size: 20px;
     padding: 20px;
     width: 20%;
+    cursor: pointer;
+}
+
+.barometer {
+    height: 30px;
+    width: 30px;
+}
+
+.fa-solid {
+    font-size: 2rem;
+}
+
+#location {
     cursor: pointer;
 }
 
@@ -162,5 +175,5 @@ img.icon {
 }
 
 .day-theme .row.px-3 {
-    background-color: rgba(130, 194, 193, 0.7)!important;
+    background-color: rgba(130, 194, 193, 0.7) !important;
 }

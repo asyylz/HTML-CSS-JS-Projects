@@ -14,6 +14,7 @@ const optCity2 = document.querySelector(".optcity.two");
 const optCity3 = document.querySelector(".optcity.three");
 const optCity4 = document.querySelector(".optcity.four");
 const container = document.querySelector(".container");
+const locationIcon = document.getElementById("location");
 
 /* ------------------------- API ------------------------ */
 let cityData = [];
@@ -30,10 +31,8 @@ async function fetchWeatherData(city) {
     }
     const data = await response.json();
     const { timezone, sys } = data;
-    console.log(timezone);
     currentSunRise = sys.sunrise;
     currentSunSet = sys.sunset;
-    console.log(currentSunRise);
     changeBackgroundColor(
       sunRiseAndSetCovertor(currentSunRise, currentSunSet, timezone)
     );
@@ -44,11 +43,9 @@ async function fetchWeatherData(city) {
 }
 
 function changeBackgroundColor(sunRiseAndSet) {
-  console.log(sunRiseAndSet);
   const sunrise = sunRiseAndSet.sunrise.slice(0, 2);
   const sunset = sunRiseAndSet.sunset.slice(0, 2);
   const localTime = sunRiseAndSet.currentCityLocalTime.slice(0, 2);
-  console.log(localTime, sunrise, sunset);
   const isNightTime = localTime < sunrise || localTime > sunset;
   if (isNightTime) {
     container.style.backgroundImage = 'url("./assets/night.jpg")';
@@ -71,6 +68,22 @@ citySearchInput.addEventListener("keydown", function (e) {
     fetchWeatherData(city);
   }
 });
+
+locationIcon.addEventListener("click", function (e) {
+  const units = "metric";
+  navigator.geolocation?.getCurrentPosition(async ({ coords }) => {
+    // Using async here
+    const { latitude, longitude } = coords;
+    const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&appid=${apiKey}`;
+    try {
+      const response = await axios(URL); // Using await here
+      retriveWeatherData(response.data);
+    } catch (e) {
+      console.error("ERROR");
+    }
+  });
+});
+
 /* ---------------------- functions --------------------- */
 function retriveWeatherData(citySelected) {
   const { main, timezone, clouds, wind, weather, name } = citySelected;
@@ -175,7 +188,6 @@ function formatTimeAndDate(timezoneOffsetMs) {
 }
 
 function sunRiseAndSetCovertor(sunrise, sunset, timezoneOffsetSeconds) {
-
   const timeSunrise = new Date(sunrise * 1000);
   const timeSunset = new Date(sunset * 1000);
 

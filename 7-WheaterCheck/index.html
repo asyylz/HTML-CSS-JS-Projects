@@ -18,6 +18,7 @@
 
     <!-- Bootstrap Bundle (Bootstrap JS + Popper.js) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Document</title>
 </head>
 
@@ -28,6 +29,7 @@
             <div class="row px-1 mt-3 mb-3 align-items-center">
                 <h1 class="large-font mr-3">26&#176;</h1>
                 <div class="d-flex flex-column mr-3">
+                    <i id="location"class="fa-solid fa-location-pin text-center"></i>
                     <h2 class="">London</h2>
                     <small class="time-and-date">10:36 - Tuesday, 22 Oct '19</small>
                 </div>
@@ -35,6 +37,7 @@
                     <img class="icon" src="">
                     <p class="icon-text text-center">Sunny</p>
                 </div>
+                
 
             </div>
         </div>
@@ -68,7 +71,7 @@
                 <div class="row px-3 pressure">
                     <p>Pressure</p>
                     <p class="ml-auto">0mm</p>
-                    <i class="fa-solid fa-wind m-1"></i>
+                    <img class="barometer" src="./assets/wi-barometer.svg" alt="">
                 </div>
                 <h3 class="">Favorite Cities</h3>
                 <div class="line mb-3"></div>
