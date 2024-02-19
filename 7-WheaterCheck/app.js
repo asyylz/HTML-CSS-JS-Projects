@@ -1,7 +1,7 @@
 /* -------------------- DOM variables ------------------- */
 const citySearchInput = document.querySelector("input.mb-5");
 const cityName = document.querySelector("h2");
-const weatherDegree = document.querySelector("h1.large-font.mr-3");
+const weatherDegree = document.querySelector("h1.large-font");
 const time = document.querySelector("small.time");
 const date = document.querySelector("small.date");
 const icontext = document.querySelector("p.icon-text");
@@ -181,11 +181,11 @@ function formatTimeAndDate(timezoneOffsetMs) {
     "0"
   );
   const monthName = months[timeInSpecifiedTimezone.getUTCMonth()];
-  const year = String(timeInSpecifiedTimezone.getUTCFullYear());
+  //const year = String(timeInSpecifiedTimezone.getUTCFullYear());
 
   const formattedDateTime = `${hours.toString().padStart(2, "0")}:${minutes
     .toString()
-    .padStart(2, "0")}${dayOfWeek}-${dayOfMonth} ${monthName} ${year}`;
+    .padStart(2, "0")}${dayOfWeek}-${dayOfMonth} ${monthName}`;
   return formattedDateTime;
 }
 

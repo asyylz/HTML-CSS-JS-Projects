@@ -22,91 +22,84 @@
     <title>Document</title>
 </head>
 
-<body class="">
-    <div class="container d-flex flex-column flex-md-row">
-        <div class="card1 d-lg-flex col-12 col-md-7">
-            <div class="d-flex col-12">
-                <h1>Weather</h1>
-                <div class="d-flex mr-3">
-                    <h2 class="text-wrap ml-4">London</h2>
-                    <div class="flex-column">
-                        <small class="time">10:36 - Tuesday, 22 Oct '19</small>
-                        <small class="date">10:36 - Tuesday, 22 Oct '19</small>
+<body>
+    <div class="container col-12 d-block d-lg-flex pt-2">
+        <div class="col-12 col-lg-7">
+            <div class="col-12 pt-3 d-flex">
+                <div class="col-4 px-0">
+                    <h1 class="">Weather</h1>
+                    <i id="location" class="fa-solid fa-location-pin mt-2"></i>
+                    <h2 class="text-wrap">London</h2>
+                    <div class="">
+                        <small class="time">10:36</small>
+                        <small class="date">Tuesday, 22 Oct '19</small>
                     </div>
-
-                    <i id="location" class="fa-solid fa-location-pin text-center"></i>
+                 
                 </div>
-
-            </div>
-
-            <div class="row px-1 align-items-center">
-                <h1 class="large-font mr-3">26&#176;</h1>
-
-                <div class="icondiv">
-                    <img class="icon" src="">
-                    <p class="icon-text text-center">Sunny</p>
+                <div class="col-8 d-block d-sm-flex">
+                    <h1 class="large-font">26&#176;</h1>
+                    <div class="icondiv">
+                        <img class="icon" src="">
+                        <p class="icon-text">Sunny</p>
+                    </div>
                 </div>
-
-
             </div>
         </div>
+      <div class="mt-2 col-12 col-lg-5">
+            <div class="side-info">
+                <div class="row px-2 px-md-2">
+                    <input type="text" name="location" placeholder="Another location" class=" rounded-left mb-5">
+                    <div class="fa fa-search mb-5 mr-0 text-center rounded-right"></div>
+                </div>
+                <div class="mr-2 ml-2">
+                    <h3 class="">Weather Details</h3>
+                    <div class="line mb-3"></div>
+                    <div class="row px-3 cloud">
+                        <p>Cloudy</p>
+                        <p class="ml-auto align-items-center">12%</p>
+                        <i class="fa-solid fa-cloud m-1"></i>
+                    </div>
+                    <div class="row px-3 humidity">
+                        <p>Humidity</p>
+                        <p class="ml-auto">78%</p>
+                        <i class="fa-solid fa-cloud-rain m-1"></i>
+                    </div>
+                    <div class="row px-3 wind">
+                        <p>Wind</p>
+                        <p class="ml-auto">1km/h</p>
+                        <i class="fa-solid fa-wind m-1"></i>
+                    </div>
+                    <div class="row px-3 pressure">
+                        <p>Pressure</p>
+                        <p class="ml-auto">0mm</p>
+                        <img class="barometer" src="./assets/wi-barometer.svg" alt="">
+                    </div>
+                    <h3 class="">Favorite Cities</h3>
+                    <div class="line mb-3"></div>
+                    <div class="row px-3 d-flex justify-content-between">
+                        <p>Birmingham</p>
+                        <p class="optcity one">Birmingham</p>
+                    </div>
+                    <div class="row px-3 d-flex justify-content-between">
+                        <p>Manchester</p>
+                        <p class="optcity two">Manchester</p>
+                    </div>
+                    <div class="row px-3 d-flex justify-content-between">
+                        <p>New York</p>
+                        <p class="optcity three">New York</p>
+                    </div>
+                    <div class="row px-3 d-flex justify-content-between">
+                        <p>Prague</p>
+                        <p class="optcity four">Prague</p>
+                    </div>
+                    <div class="line my-3"></div>
 
-        <div class="side-info col-12 col-md-5">
-            <div class="row px-2 px-md-2">
-                <input type="text" name="location" placeholder="Another location" class=" rounded-left mb-5">
-                <div class="fa fa-search mb-5 mr-0 text-center rounded-right"></div>
+                </div>
+                </di>
             </div>
-            <div class="mr-2 ml-2">
-                <h3 class="">Weather Details</h3>
-                <div class="line mb-3"></div>
-                <div class="row px-3 cloud">
-                    <p>Cloudy</p>
-                    <p class="ml-auto align-items-center">12%</p>
-                    <i class="fa-solid fa-cloud m-1"></i>
-                </div>
-
-                <div class="row px-3 humidity">
-                    <p>Humidity</p>
-                    <p class="ml-auto">78%</p>
-                    <i class="fa-solid fa-cloud-rain m-1"></i>
-                </div>
-
-                <div class="row px-3 wind">
-                    <p>Wind</p>
-                    <p class="ml-auto">1km/h</p>
-                    <i class="fa-solid fa-wind m-1"></i>
-                </div>
-
-                <div class="row px-3 pressure">
-                    <p>Pressure</p>
-                    <p class="ml-auto">0mm</p>
-                    <img class="barometer" src="./assets/wi-barometer.svg" alt="">
-                </div>
-                <h3 class="">Favorite Cities</h3>
-                <div class="line mb-3"></div>
-                <div class="row px-3 d-flex justify-content-between">
-                    <p>Birmingham</p>
-                    <p class="optcity one">Birmingham</p>
-                </div>
-                <div class="row px-3 d-flex justify-content-between">
-                    <p>Manchester</p>
-                    <p class="optcity two">Manchester</p>
-                </div>
-                <div class="row px-3 d-flex justify-content-between">
-                    <p>New York</p>
-                    <p class="optcity three">New York</p>
-                </div>
-                <div class="row px-3 d-flex justify-content-between">
-                    <p>Prague</p>
-                    <p class="optcity four">Prague</p>
-                </div>
-                <div class="line my-3"></div>
-
-            </div>
-            </di>
         </div>
-
-        <script defer src="./app.js"></script>
+    </div>
+    <script defer src="./app.js"></script>
 </body>
 
 </html>

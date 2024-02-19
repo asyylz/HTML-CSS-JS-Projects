@@ -63,7 +63,8 @@ div.mr-2 h3 {
     padding: 30px 20px 30px 50px;
     border-radius: 2rem !important;
 }
-.card1.d-lg-flex{
+
+.card1.d-lg-flex {
     height: 150px;
 }
 
@@ -79,7 +80,7 @@ input {
     box-sizing: border-box;
     border: none !important;
     color: var(--night--theme-color1);
-    border: 1px solid var(--night--theme-color1)!important;
+    border: 1px solid var(--night--theme-color1) !important;
 }
 
 input:focus {
@@ -96,8 +97,8 @@ input:focus {
 
 p.icon-text {
     position: absolute;
-    bottom: 4rem;
-    right: -7rem;
+    top: 0;
+    left: 6rem;
     transform: translateX(-50%);
     font-size: 1rem;
     font-weight: 500;
@@ -106,14 +107,12 @@ p.icon-text {
 img.icon {
     height: 100%;
     width: 100%;
-    margin-right: 10px;
+    /* margin-right: 10px; */
 }
+
 #location {
     cursor: pointer;
-    position: absolute;
-    left: 2rem;
-    top:5rem;
-}  
+}
 
 .fa-search {
     color: #607D8B;
@@ -133,7 +132,17 @@ img.icon {
     font-size: 2rem;
 }
 
+h1.large-font {
+    text-align: end !important;
+}
 
+div.col-8.d-block.d-sm-flex {
+    padding: 0 !important;
+}
+
+div.col-12.pt-3.d-flex {
+    padding:1rem 0 0 0 !important;
+}
 
 /* ---------------------- day-theme --------------------- */
 .container.day-theme {
@@ -174,13 +183,13 @@ img.icon {
 .day-theme input {
     background-color: var(--day--theme-color3) !important;
     color: var(--day--theme-color1);
-    border: 2px solid var(--day--theme-color2)!important;
+    border: 2px solid var(--day--theme-color2) !important;
 }
 
 .day-theme .fa-search {
     color: var(--day--theme-color3);
     background-color: var(--day--theme-color2);
- 
+
 }
 
 .day-theme .row.px-3 {
