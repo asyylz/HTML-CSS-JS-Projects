@@ -1,9 +1,9 @@
 /* -------------------- DOM variables ------------------- */
 const citySearchInput = document.querySelector("input.mb-5");
 const cityName = document.querySelector("h2");
-const weatherDegree = document.querySelector("h1.large-font");
-const time = document.querySelector("small.time");
-const date = document.querySelector("small.date");
+const weatherDegree = document.querySelector("p.large-font");
+const time = document.querySelector("p.time");
+const date = document.querySelector("p.date");
 const icontext = document.querySelector("p.icon-text");
 const icon = document.querySelector("img.icon");
 const cloudy = document.querySelector(".cloud p.ml-auto");

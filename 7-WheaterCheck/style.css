@@ -132,8 +132,9 @@ img.icon {
     font-size: 2rem;
 }
 
-h1.large-font {
+p.large-font {
     text-align: end !important;
+    font-size: 4rem !important;
 }
 
 div.col-8.d-block.d-sm-flex {
